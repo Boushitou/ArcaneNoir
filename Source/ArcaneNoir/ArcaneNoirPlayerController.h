@@ -38,9 +38,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* SetDestinationClickAction;
 
-	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* SetDestinationTouchAction;
+	UInputAction* DrinkHealthPotionAction;
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -55,8 +54,8 @@ protected:
 	void OnInputStarted();
 	void OnSetDestinationTriggered();
 	void OnSetDestinationReleased();
-	void OnTouchTriggered();
-	void OnTouchReleased();
+
+	void OnDrinkHealthPotionStarted();
 
 private:
 	FVector CachedDestination;

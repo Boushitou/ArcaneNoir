@@ -48,11 +48,7 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AArcaneNoirPlayerController::OnSetDestinationReleased);
 		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Canceled, this, &AArcaneNoirPlayerController::OnSetDestinationReleased);
 
-		// Setup touch input events
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnInputStarted);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AArcaneNoirPlayerController::OnTouchTriggered);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AArcaneNoirPlayerController::OnTouchReleased);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AArcaneNoirPlayerController::OnTouchReleased);
+		EnhancedInputComponent->BindAction(DrinkHealthPotionAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnDrinkHealthPotionStarted);
 	}
 	else
 	{
@@ -111,15 +107,7 @@ void AArcaneNoirPlayerController::OnSetDestinationReleased()
 	FollowTime = 0.f;
 }
 
-// Triggered every frame when the input is held down
-void AArcaneNoirPlayerController::OnTouchTriggered()
+void AArcaneNoirPlayerController::OnDrinkHealthPotionStarted()
 {
-	bIsTouch = true;
-	OnSetDestinationTriggered();
-}
-
-void AArcaneNoirPlayerController::OnTouchReleased()
-{
-	bIsTouch = false;
-	OnSetDestinationReleased();
+	UE_LOG(LogTemp, Log, TEXT("Drinking health potion !"));
 }
