@@ -48,7 +48,16 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AArcaneNoirPlayerController::OnSetDestinationReleased);
 		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Canceled, this, &AArcaneNoirPlayerController::OnSetDestinationReleased);
 
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnAttackStarted);
+		EnhancedInputComponent->BindAction(UseSkillOneAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnUseSkillOneStarted);
+		EnhancedInputComponent->BindAction(UseSkillTwoAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnUseSkillTwoStarted);
+		EnhancedInputComponent->BindAction(UseSkillThreeAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnUseSkillThreeStarted);
 		EnhancedInputComponent->BindAction(DrinkHealthPotionAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnDrinkHealthPotionStarted);
+		EnhancedInputComponent->BindAction(DrinkBlackInkPotionAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted);
+		EnhancedInputComponent->BindAction(OpenInventoryMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenInventoryMenuStarted);
+		EnhancedInputComponent->BindAction(OpenPauseMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenPauseMenuStarted);
+		EnhancedInputComponent->BindAction(OpenStatsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenStatsMenuStarted);
+		EnhancedInputComponent->BindAction(OpenSkillsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenSkillsMenuStarted);
 	}
 	else
 	{
@@ -107,7 +116,52 @@ void AArcaneNoirPlayerController::OnSetDestinationReleased()
 	FollowTime = 0.f;
 }
 
+void AArcaneNoirPlayerController::OnAttackStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Use attack button"));
+}
+
 void AArcaneNoirPlayerController::OnDrinkHealthPotionStarted()
 {
 	UE_LOG(LogTemp, Log, TEXT("Drinking health potion !"));
+}
+
+void AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Drinking Black Ink potion !"));
+}
+
+void AArcaneNoirPlayerController::OnUseSkillOneStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Used skill one !"));
+}
+
+void AArcaneNoirPlayerController::OnUseSkillTwoStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Used skill two !"));
+}
+
+void AArcaneNoirPlayerController::OnUseSkillThreeStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Used skill three !"));
+}
+
+void AArcaneNoirPlayerController::OnOpenPauseMenuStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Opened pause menu !"));
+}
+
+void AArcaneNoirPlayerController::OnOpenSkillsMenuStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Opened skills menu !"));
+}
+
+void AArcaneNoirPlayerController::OnOpenStatsMenuStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Opened stats menu !"));
+}
+
+void AArcaneNoirPlayerController::OnOpenInventoryMenuStarted()
+{
+	UE_LOG(LogTemp, Log, TEXT("Opened inventory menu !"));
 }

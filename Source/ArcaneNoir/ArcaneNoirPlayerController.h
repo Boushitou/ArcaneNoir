@@ -37,9 +37,26 @@ public:
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* SetDestinationClickAction;
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* AttackAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* DrinkHealthPotionAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* DrinkBlackInkPotionAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* UseSkillOneAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* UseSkillTwoAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* UseSkillThreeAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* OpenPauseMenuAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* OpenSkillsMenuAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* OpenStatsMenuAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* OpenInventoryMenuAction;
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -55,7 +72,17 @@ protected:
 	void OnSetDestinationTriggered();
 	void OnSetDestinationReleased();
 
+	void OnAttackStarted();
 	void OnDrinkHealthPotionStarted();
+	void OnDrinkBlackInkPotionStarted();
+	void OnUseSkillOneStarted();
+	void OnUseSkillTwoStarted();
+	void OnUseSkillThreeStarted();
+
+	void OnOpenPauseMenuStarted();
+	void OnOpenSkillsMenuStarted();
+	void OnOpenStatsMenuStarted();
+	void OnOpenInventoryMenuStarted();
 
 private:
 	FVector CachedDestination;
