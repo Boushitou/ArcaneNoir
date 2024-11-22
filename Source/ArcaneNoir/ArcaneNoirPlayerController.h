@@ -57,6 +57,8 @@ public:
 	UInputAction* OpenStatsMenuAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* OpenInventoryMenuAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* GiveXpAction;
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -83,6 +85,8 @@ protected:
 	void OnOpenSkillsMenuStarted();
 	void OnOpenStatsMenuStarted();
 	void OnOpenInventoryMenuStarted();
+
+	void OnGiveXpStarted(); //It's only for testing purpose and see if the leveling system works.
 
 private:
 	FVector CachedDestination;

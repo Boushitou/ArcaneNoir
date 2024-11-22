@@ -8,8 +8,9 @@ UPlayerStatsComponent::UPlayerStatsComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
+	PrimaryComponentTick.bCanEverTick = false;
+	currentXp = 0;
+	
 	// ...
 }
 
@@ -18,67 +19,35 @@ UPlayerStatsComponent::UPlayerStatsComponent()
 void UPlayerStatsComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	xpNeeded = BaseXpNeeded;
 	// ...
 	
 }
 
-
-// Called every frame
-void UPlayerStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UPlayerStatsComponent::LevelUp()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Level++;
 
-	// ...
+	currentXp -= xpNeeded;
+	xpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Level: %d"), Level));
+	}
 }
 
-const int32& UPlayerStatsComponent::GetLevel()
+void UPlayerStatsComponent::AddExperience(int32 amount)
 {
-	return Level;
-}
+	currentXp += amount;
 
-const int32& UPlayerStatsComponent::GetStrength()
-{
-	return Strength;
-}
-
-const int32& UPlayerStatsComponent::GetBlackInk()
-{
-	return BlackInk;
-}
-
-const int32& UPlayerStatsComponent::GetDexterity()
-{
-	return Dexterity;
-}
-
-const int32& UPlayerStatsComponent::GetIntelligence()
-{
-	return Intelligence;
-}
-
-void UPlayerStatsComponent::SetLevel(int32 newLevel)
-{
-	Level = newLevel;
-}
-
-void UPlayerStatsComponent::SetBlackInk(int32 newBlackInk)
-{
-	BlackInk = newBlackInk;
-}
-
-void UPlayerStatsComponent::SetStrength(int32 newStrength)
-{
-	Strength = newStrength;
-}
-
-void UPlayerStatsComponent::SetDexterity(int32 newDexterity)
-{
-	Dexterity = newDexterity;
-}
-
-void UPlayerStatsComponent::SetIntelligence(int32 newIntelligence)
-{
-	Intelligence = newIntelligence;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("Current XP: %d"), currentXp));
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("XP needed: %d"), xpNeeded));
+	}
+	
+	if (currentXp >= xpNeeded)
+		LevelUp();
 }
 

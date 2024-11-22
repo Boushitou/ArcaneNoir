@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "PlayerStatsComponent.h"
 #include "Engine/LocalPlayer.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -58,6 +59,7 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(OpenPauseMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenPauseMenuStarted);
 		EnhancedInputComponent->BindAction(OpenStatsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenStatsMenuStarted);
 		EnhancedInputComponent->BindAction(OpenSkillsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenSkillsMenuStarted);
+		EnhancedInputComponent->BindAction(GiveXpAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnGiveXpStarted);
 	}
 	else
 	{
@@ -81,7 +83,6 @@ void AArcaneNoirPlayerController::OnSetDestinationTriggered()
 	bool bHitSuccessful = false;
 
 	bHitSuccessful = GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, Hit);
-
 
 	// If we hit a surface, cache the location
 	if (bHitSuccessful)
@@ -159,4 +160,22 @@ void AArcaneNoirPlayerController::OnOpenStatsMenuStarted()
 void AArcaneNoirPlayerController::OnOpenInventoryMenuStarted()
 {
 	UE_LOG(LogTemp, Log, TEXT("Opened inventory menu !"));
+}
+
+void AArcaneNoirPlayerController::OnGiveXpStarted()
+{
+	APawn* ControlledPawn = GetPawn();
+	if (ControlledPawn != nullptr)
+	{
+		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
+		if (ArcaneCharacter == nullptr)
+			return;
+		
+		UPlayerStatsComponent* PlayerStat = ArcaneCharacter->GetPlayerStats();
+
+		 if (PlayerStat == nullptr)
+		 	return;
+		
+		 PlayerStat->AddExperience(5);
+	}
 }

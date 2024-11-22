@@ -13,14 +13,16 @@ class AArcaneNoirCharacter : public ACharacter
 
 public:
 	AArcaneNoirCharacter();
-
+	
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
-
+	
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	FORCEINLINE class UPlayerStatsComponent* GetPlayerStats() const { return PlayerStats; }
 
 private:
 	/** Top down camera */
@@ -30,5 +32,8 @@ private:
 	/** Camera boom positioning the camera above the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerStats, meta = (AllowPrivateAccess = "true"))
+	class UPlayerStatsComponent* PlayerStats;
 };
 

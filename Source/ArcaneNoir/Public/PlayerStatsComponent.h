@@ -25,26 +25,43 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	int32 Level;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	int32 MaxLevel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	int32 BlackInk;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	int32 Strength;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	int32 Dexterity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	int32 Vitality;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	int32 Intelligence;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
+	int32 BaseXpNeeded;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Balancing")
+	float XpFactor;
 	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	FORCEINLINE const int32& GetLevel() { return Level; }
+	FORCEINLINE const int32& GetStrength() { return Strength; }
+	FORCEINLINE const int32& GetBlackInk() { return BlackInk; }
+	FORCEINLINE const int32& GetDexterity() { return Dexterity; }
+	FORCEINLINE const int32& GetVitality() { return Vitality; }
+	FORCEINLINE const int32& GetIntelligence() { return Intelligence; }
 
-	const int32& GetLevel();
-	const int32& GetStrength();
-	const int32& GetBlackInk();
-	const int32& GetDexterity();
-	const int32& GetIntelligence();
+	FORCEINLINE void SetLevel(int32 newLevel) { Level = newLevel; }
+	FORCEINLINE void SetBlackInk(int32 newBlackInk) { BlackInk = newBlackInk; }
+	FORCEINLINE void SetStrength(int32 newStrength) { Strength = newStrength; }
+	FORCEINLINE void SetDexterity(int32 newDexterity) { Dexterity = newDexterity; }
+	FORCEINLINE void SetVitality(int32 newVitality) { Vitality = newVitality; }
+	FORCEINLINE void SetIntelligence(int32 newIntelligence) { Intelligence = newIntelligence; }
 
-	void SetLevel(int32 newLevel);
-	void SetBlackInk(int32 newBlackInk);
-	void SetStrength(int32 newStrength);
-	void SetDexterity(int32 newDexterity);
-	void SetIntelligence(int32 newIntelligence);
+	void LevelUp();
+	void AddExperience(int32 amount);
+
+private:
+
+	int32 currentXp;
+	int32 xpNeeded;
 };
