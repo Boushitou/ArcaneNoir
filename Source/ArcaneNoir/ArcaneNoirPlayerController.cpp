@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "HealthComponent.h"
 #include "PlayerStatsComponent.h"
 #include "Engine/LocalPlayer.h"
 
@@ -119,12 +120,36 @@ void AArcaneNoirPlayerController::OnAttackStarted()
 
 void AArcaneNoirPlayerController::OnDrinkHealthPotionStarted()
 {
-	UE_LOG(LogTemp, Log, TEXT("Drinking health potion !"));
+	APawn* ControlledPawn = GetPawn();
+	if (ControlledPawn != nullptr)
+	{
+		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
+		if (ArcaneCharacter == nullptr)
+			return;
+
+		UHealthComponent* Health = ArcaneCharacter->GetHealthComponent();
+		if (Health == nullptr)
+			return;
+
+		Health->HealHealth(10);
+	}
 }
 
 void AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted()
 {
-	UE_LOG(LogTemp, Log, TEXT("Drinking Black Ink potion !"));
+	APawn* ControlledPawn = GetPawn();
+	if (ControlledPawn != nullptr)
+	{
+		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
+		if (ArcaneCharacter == nullptr)
+			return;
+
+		UHealthComponent* Health = ArcaneCharacter->GetHealthComponent();
+		if (Health == nullptr)
+			return;
+
+		Health->DamageHealth(10);
+	}
 }
 
 void AArcaneNoirPlayerController::OnUseSkillOneStarted()
@@ -172,9 +197,10 @@ void AArcaneNoirPlayerController::OnGiveXpStarted()
 			return;
 		
 		UPlayerStatsComponent* PlayerStat = ArcaneCharacter->GetPlayerStats();
-
+		
 		 if (PlayerStat == nullptr)
 		 	return;
+
 		
 		 PlayerStat->AddExperience(5);
 	}

@@ -23,6 +23,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	FORCEINLINE class UPlayerStatsComponent* GetPlayerStats() const { return PlayerStats; }
+	FORCEINLINE class UHealthComponent* GetHealthComponent() const { return Health; }
 
 private:
 	/** Top down camera */
@@ -35,5 +36,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerStats, meta = (AllowPrivateAccess = "true"))
 	class UPlayerStatsComponent* PlayerStats;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
+	class UHealthComponent* Health;
 };
 
