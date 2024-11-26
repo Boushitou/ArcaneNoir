@@ -60,7 +60,7 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(OpenPauseMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenPauseMenuStarted);
 		EnhancedInputComponent->BindAction(OpenStatsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenStatsMenuStarted);
 		EnhancedInputComponent->BindAction(OpenSkillsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenSkillsMenuStarted);
-		EnhancedInputComponent->BindAction(GiveXpAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnGiveXpStarted);
+		EnhancedInputComponent->BindAction(GiveXpAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnTestInputStarted);
 	}
 	else
 	{
@@ -148,7 +148,7 @@ void AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted()
 		if (Health == nullptr)
 			return;
 
-		Health->DamageHealth(10);
+		Health->TakeDamage(10);
 	}
 }
 
@@ -187,7 +187,7 @@ void AArcaneNoirPlayerController::OnOpenInventoryMenuStarted()
 	UE_LOG(LogTemp, Log, TEXT("Opened inventory menu !"));
 }
 
-void AArcaneNoirPlayerController::OnGiveXpStarted()
+void AArcaneNoirPlayerController::OnTestInputStarted()
 {
 	APawn* ControlledPawn = GetPawn();
 	if (ControlledPawn != nullptr)
@@ -201,7 +201,10 @@ void AArcaneNoirPlayerController::OnGiveXpStarted()
 		 if (PlayerStat == nullptr)
 		 	return;
 
-		
-		 PlayerStat->AddExperience(5);
+		UHealthComponent* Health = ArcaneCharacter->GetHealthComponent();
+		if (Health == nullptr)
+			return;
+		Health->TakeDamage(5);
+		 //PlayerStat->AddExperience(5);
 	}
 }

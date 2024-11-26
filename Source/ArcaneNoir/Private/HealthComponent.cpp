@@ -10,7 +10,7 @@ UHealthComponent::UHealthComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	isDead = false;
+	bIsDead = false;
 }
 
 
@@ -19,7 +19,7 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	currentHealth = MaxHealth;
+	CurrentHealth = MaxHealth;
 	
 }
 
@@ -32,27 +32,27 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
-void UHealthComponent::DamageHealth(int32 amount)
+void UHealthComponent::TakeDamage(int32 amount)
 {
-	currentHealth -= amount;
+	CurrentHealth -= amount;
 
-	if (currentHealth <= 0)
+	if (CurrentHealth <= 0)
 	{
-		currentHealth = 0;
+		CurrentHealth = 0;
 		Death();
 	}
 }
 
 void UHealthComponent::HealHealth(int32 amount)
 {
-	currentHealth += amount;
+	CurrentHealth += amount;
 	
-	currentHealth = currentHealth > MaxHealth ? MaxHealth : currentHealth;
+	CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
 }
 
 void UHealthComponent::Death()
 {
-	isDead = true;
+	bIsDead = true;
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("YOU DIED !"));
 	//dead

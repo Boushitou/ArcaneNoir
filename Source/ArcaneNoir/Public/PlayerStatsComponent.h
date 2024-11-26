@@ -62,6 +62,6 @@ public:
 
 private:
 
-	int32 currentXp;
-	int32 xpNeeded;
+	int32 CurrentXp;
+	int32 XpNeeded;
 };

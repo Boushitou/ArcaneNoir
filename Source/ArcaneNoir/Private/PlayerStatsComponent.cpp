@@ -9,7 +9,7 @@ UPlayerStatsComponent::UPlayerStatsComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-	currentXp = 0;
+	CurrentXp = 0;
 	
 	// ...
 }
@@ -19,7 +19,7 @@ UPlayerStatsComponent::UPlayerStatsComponent()
 void UPlayerStatsComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	xpNeeded = BaseXpNeeded;
+	XpNeeded = BaseXpNeeded;
 	// ...
 	
 }
@@ -28,8 +28,8 @@ void UPlayerStatsComponent::LevelUp()
 {
 	Level++;
 
-	currentXp -= xpNeeded;
-	xpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
+	CurrentXp -= XpNeeded;
+	XpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
 
 	if (GEngine)
 	{
@@ -39,15 +39,15 @@ void UPlayerStatsComponent::LevelUp()
 
 void UPlayerStatsComponent::AddExperience(int32 amount)
 {
-	currentXp += amount;
+	CurrentXp += amount;
 
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("Current XP: %d"), currentXp));
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("XP needed: %d"), xpNeeded));
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("Current XP: %d"), CurrentXp));
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("XP needed: %d"), XpNeeded));
 	}
 	
-	if (currentXp >= xpNeeded)
+	if (CurrentXp >= XpNeeded)
 		LevelUp();
 }
 

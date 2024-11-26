@@ -28,16 +28,16 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void DamageHealth(int32 amount);
+	void TakeDamage(int32 amount);
 	void HealHealth(int32 amount);
 	void Death();
 
-	FORCEINLINE const bool& GetIsDead() { return isDead; }
+	FORCEINLINE const bool& GetIsDead() { return bIsDead; }
 	
 	FORCEINLINE void SetMaxHealth(int32 newMaxHealth) { MaxHealth = newMaxHealth; }
 
 private:
 
-	int32 currentHealth;
-	bool isDead;
+	int32 CurrentHealth;
+	bool bIsDead;
 };

@@ -33,7 +33,8 @@ public:
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
-	
+
+#pragma region Input Actions
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* SetDestinationClickAction;
@@ -59,7 +60,8 @@ public:
 	UInputAction* OpenInventoryMenuAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* GiveXpAction;
-
+#pragma endregion
+	
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -86,7 +88,7 @@ protected:
 	void OnOpenStatsMenuStarted();
 	void OnOpenInventoryMenuStarted();
 
-	void OnGiveXpStarted(); //It's only for testing purpose and see if the leveling system works.
+	void OnTestInputStarted(); //It's only for testing purpose and see if the leveling system works.
 
 private:
 	FVector CachedDestination;
