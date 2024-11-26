@@ -14,7 +14,8 @@ class ARCANENOIR_API AArcaneNoirEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
 
-protected:
+public:
+	
 	virtual void BeginPlay() override;
 	
 private:

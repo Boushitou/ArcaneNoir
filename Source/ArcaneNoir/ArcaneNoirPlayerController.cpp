@@ -115,7 +115,29 @@ void AArcaneNoirPlayerController::OnSetDestinationReleased()
 
 void AArcaneNoirPlayerController::OnAttackStarted()
 {
-	UE_LOG(LogTemp, Log, TEXT("Use attack button"));
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Used attack input ! !"));
+	FHitResult Hit;
+	bool bHitSuccessful = false;
+
+	bHitSuccessful = GetHitResultUnderCursor(ECollisionChannel::ECC_Pawn, true, Hit);
+
+	if (bHitSuccessful)
+	{
+		CachedDestination = Hit.Location;
+	}
+
+	AActor* HitActor = Hit.GetActor();
+	UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, CachedDestination);
+
+	if (HitActor != nullptr)
+	{
+		UHealthComponent* HitActorHealth = HitActor->FindComponentByClass<UHealthComponent>();
+		if (HitActorHealth == nullptr)
+			return;
+
+		HitActorHealth->TakeDamage(10);
+	}
 }
 
 void AArcaneNoirPlayerController::OnDrinkHealthPotionStarted()

@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ArcaneNoirEnemy.generated.h"
 
+class UHealthComponent;
 UCLASS()
 class ARCANENOIR_API AArcaneNoirEnemy : public ACharacter
 {
@@ -22,5 +23,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+	FORCEINLINE UHealthComponent* GetHealthComponent() const { return Health; }
+
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
+	UHealthComponent* Health;
 };

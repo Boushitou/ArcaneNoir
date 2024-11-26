@@ -54,7 +54,10 @@ void UHealthComponent::Death()
 {
 	bIsDead = true;
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("YOU DIED !"));
+	{
+		FString DebugMessage = GetOwner()->GetName() + TEXT(" is dead");
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, DebugMessage);
+	}
 	//dead
 }
 

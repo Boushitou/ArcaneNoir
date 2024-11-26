@@ -2,6 +2,8 @@
 
 
 #include "ArcaneNoirEnemy.h"
+
+#include "HealthComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -16,6 +18,7 @@ AArcaneNoirEnemy::AArcaneNoirEnemy()
 	GetCharacterMovement()->bConstrainToPlane = true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 	
+	Health = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	
 	PrimaryActorTick.bCanEverTick = true;
 
