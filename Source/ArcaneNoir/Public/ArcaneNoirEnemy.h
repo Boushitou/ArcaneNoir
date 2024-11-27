@@ -7,6 +7,7 @@
 #include "ArcaneNoirEnemy.generated.h"
 
 class UHealthComponent;
+class UBehaviorTree;
 UCLASS()
 class ARCANENOIR_API AArcaneNoirEnemy : public ACharacter
 {
@@ -25,8 +26,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	FORCEINLINE UHealthComponent* GetHealthComponent() const { return Health; }
+	FORCEINLINE UBehaviorTree* GetBehaviorTree() const { return BehaviorTree; }
+
+	FORCEINLINE FVector GetOrigin() const { return Origin; }
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
 	UHealthComponent* Health;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI, meta = (AllowPrivateAccess = "true"))
+
+	UBehaviorTree* BehaviorTree;
+
+	FVector Origin;
 };

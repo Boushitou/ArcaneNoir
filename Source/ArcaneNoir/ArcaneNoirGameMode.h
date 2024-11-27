@@ -13,6 +13,8 @@ class AArcaneNoirGameMode : public AGameModeBase
 
 public:
 	AArcaneNoirGameMode();
+
+
 };
 
 

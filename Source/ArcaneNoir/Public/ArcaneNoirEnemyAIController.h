@@ -15,13 +15,13 @@ class ARCANENOIR_API AArcaneNoirEnemyAIController : public AAIController
 	GENERATED_BODY()
 
 public:
+	explicit AArcaneNoirEnemyAIController(FObjectInitializer const& ObjectInitializer);
 	
 	virtual void BeginPlay() override;
-	
-private:
-	UPROPERTY(EditAnywhere, Category = "AI")
-	UBehaviorTree* AIBehavior;
 
-	UPROPERTY(EditAnywhere, Category = "AI")
-	UBlackboardData* AIBlackBoard;
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
+
+private:
+	
 };

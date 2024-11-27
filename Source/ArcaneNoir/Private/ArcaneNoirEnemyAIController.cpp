@@ -2,19 +2,33 @@
 
 
 #include "ArcaneNoirEnemyAIController.h"
+
+#include "ArcaneNoirEnemy.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BehaviorTree.h"
 
+AArcaneNoirEnemyAIController::AArcaneNoirEnemyAIController(FObjectInitializer const& ObjectInitializer)
+{
+}
+
 void AArcaneNoirEnemyAIController::BeginPlay()
 {
 	Super::BeginPlay();
+}
 
-	if (AIBehavior && AIBlackBoard)
+void AArcaneNoirEnemyAIController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	if (const AArcaneNoirEnemy* enemy = Cast<AArcaneNoirEnemy>(InPawn))
 	{
-		UBlackboardComponent* BlackboardComponent = Blackboard.Get();
-		
-		UseBlackboard(AIBlackBoard, BlackboardComponent);
-		RunBehaviorTree(AIBehavior);
+		if (UBehaviorTree* behaviorTree = enemy->GetBehaviorTree())
+		{
+			UBlackboardComponent* blackBoard;
+			UseBlackboard(behaviorTree->BlackboardAsset, blackBoard);
+			Blackboard = blackBoard;
+			RunBehaviorTree(behaviorTree);
+		}
 	}
 }

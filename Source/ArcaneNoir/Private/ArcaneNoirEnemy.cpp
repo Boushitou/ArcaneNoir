@@ -4,8 +4,10 @@
 #include "ArcaneNoirEnemy.h"
 
 #include "HealthComponent.h"
+#include "BehaviorTree/BehaviorTree.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "ArcaneNoirEnemyAIController.h"
 
 
 // Sets default values
@@ -28,7 +30,7 @@ AArcaneNoirEnemy::AArcaneNoirEnemy()
 void AArcaneNoirEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Origin = GetActorLocation();
 }
 
 // Called every frame
