@@ -18,7 +18,8 @@ class AArcaneNoirCharacter : public ACharacter
 
 public:
 	AArcaneNoirCharacter();
-	
+
+	virtual void BeginPlay() override;
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 	
@@ -29,6 +30,8 @@ public:
 
 	FORCEINLINE  UPlayerStatsComponent* GetPlayerStats() const { return PlayerStats; }
 	FORCEINLINE  UHealthComponent* GetHealthComponent() const { return Health; }
+
+	void HandleDeath();
 
 private:
 	/** Top down camera */

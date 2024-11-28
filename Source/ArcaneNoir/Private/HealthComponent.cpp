@@ -53,11 +53,6 @@ void UHealthComponent::HealHealth(int32 amount)
 void UHealthComponent::Death()
 {
 	bIsDead = true;
-	if (GEngine)
-	{
-		FString DebugMessage = GetOwner()->GetName() + TEXT(" is dead");
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, DebugMessage);
-	}
-	//dead
+	OnDeath.Broadcast();
 }
 

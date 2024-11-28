@@ -52,7 +52,22 @@ AArcaneNoirCharacter::AArcaneNoirCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
+void AArcaneNoirCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	Health->OnDeath.AddUObject(this, &AArcaneNoirCharacter::HandleDeath);
+}
+
 void AArcaneNoirCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 }
+
+void AArcaneNoirCharacter::HandleDeath()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Yellow, TEXT("THE PLAYER IS DEAD"));
+	}
+}
+

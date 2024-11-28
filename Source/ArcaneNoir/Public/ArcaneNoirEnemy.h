@@ -26,6 +26,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDeath();
+	void DisableEnemy();
+	void EnableEnemy();
+
 	FORCEINLINE UHealthComponent* GetHealthComponent() const { return Health; }
 	FORCEINLINE UBehaviorTree* GetBehaviorTree() const { return BehaviorTree; }
 

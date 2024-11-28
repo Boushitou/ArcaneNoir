@@ -36,6 +36,9 @@ public:
 	
 	FORCEINLINE void SetMaxHealth(int32 newMaxHealth) { MaxHealth = newMaxHealth; }
 
+	DECLARE_MULTICAST_DELEGATE(FOnDeath)
+	FOnDeath OnDeath;
+
 private:
 
 	int32 CurrentHealth;

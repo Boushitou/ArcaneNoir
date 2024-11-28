@@ -115,8 +115,6 @@ void AArcaneNoirPlayerController::OnSetDestinationReleased()
 
 void AArcaneNoirPlayerController::OnAttackStarted()
 {
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Used attack input ! !"));
 	FHitResult Hit;
 	bool bHitSuccessful = false;
 
