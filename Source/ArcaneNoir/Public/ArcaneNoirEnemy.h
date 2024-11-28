@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ArcaneNoirEnemy.generated.h"
 
+class USphereComponent;
 class UHealthComponent;
 class UBehaviorTree;
 UCLASS()
@@ -35,8 +36,10 @@ private:
 	UHealthComponent* Health;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI, meta = (AllowPrivateAccess = "true"))
-
 	UBehaviorTree* BehaviorTree;
 
 	FVector Origin;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
+	float Radius;
 };

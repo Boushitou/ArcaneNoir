@@ -8,6 +8,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ArcaneNoirEnemyAIController.h"
+#include "Components/SphereComponent.h"
 
 
 // Sets default values
@@ -37,6 +38,9 @@ void AArcaneNoirEnemy::BeginPlay()
 void AArcaneNoirEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	DrawDebugCircle(GetWorld(), GetActorLocation(), Radius, 32, FColor::Red, false, -1, 0, 1, FVector(1, 0, 0), FVector(0, 1, 0), false);
+	DrawDebugCircle(GetWorld(), Origin, 500, 32, FColor::Blue, false, -1, 0, 1, FVector(1, 0, 0), FVector(0, 1, 0), false);
 
 }
 

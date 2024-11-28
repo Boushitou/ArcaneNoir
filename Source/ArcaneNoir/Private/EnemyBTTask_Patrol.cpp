@@ -6,9 +6,7 @@
 #include "ArcaneNoirEnemy.h"
 #include "ArcaneNoirEnemyAIController.h"
 #include "NavigationSystem.h"
-#include "ArcaneNoir/ArcaneNoirPlayerController.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "GameFramework/PawnMovementComponent.h"
 
 UEnemyBTTask_Patrol::UEnemyBTTask_Patrol(const FObjectInitializer& ObjectInitializer)
 {
@@ -17,19 +15,19 @@ UEnemyBTTask_Patrol::UEnemyBTTask_Patrol(const FObjectInitializer& ObjectInitial
 
 EBTNodeResult::Type UEnemyBTTask_Patrol::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	if (const AArcaneNoirEnemyAIController* controller = Cast<AArcaneNoirEnemyAIController>(OwnerComp.GetAIOwner()))
+	if (const AArcaneNoirEnemyAIController* Controller = Cast<AArcaneNoirEnemyAIController>(OwnerComp.GetAIOwner()))
 	{
-		if (const AArcaneNoirEnemy* enemy = Cast<AArcaneNoirEnemy>(controller->GetPawn()))
+		if (const AArcaneNoirEnemy* Enemy = Cast<AArcaneNoirEnemy>(Controller->GetPawn()))
 		{
-			const FVector origin = enemy->GetOrigin();
+			const FVector Origin = Enemy->GetOrigin();
 
 			if (const UNavigationSystemV1* navSystem = UNavigationSystemV1::GetCurrent(GetWorld()))
 			{
-				FNavLocation result;
+				FNavLocation Result;
 				
-				if (navSystem->GetRandomPointInNavigableRadius(origin, PatrolRadius, result))
+				if (navSystem->GetRandomPointInNavigableRadius(Origin, PatrolRadius, Result))
 				{
-					OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), result.Location);
+					OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), Result.Location);
 				}
 				FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 				return EBTNodeResult::Succeeded;
@@ -38,3 +36,5 @@ EBTNodeResult::Type UEnemyBTTask_Patrol::ExecuteTask(UBehaviorTreeComponent& Own
 	}
 	return EBTNodeResult::Failed;
 }
+
+
