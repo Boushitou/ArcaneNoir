@@ -3,6 +3,7 @@
 #include "ArcaneNoirCharacter.h"
 
 #include "HealthComponent.h"
+#include "InventoryComponent.h"
 #include "PlayerStatsComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -46,6 +47,7 @@ AArcaneNoirCharacter::AArcaneNoirCharacter()
 	//Create player stats
 	PlayerStats = CreateDefaultSubobject<UPlayerStatsComponent>(TEXT("PlayerStats"));
 	Health = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;

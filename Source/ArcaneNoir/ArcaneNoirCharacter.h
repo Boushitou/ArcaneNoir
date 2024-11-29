@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ArcaneNoirCharacter.generated.h"
 
+class UInventoryComponent;
 class UCameraComponent;
 class USpringArmComponent;
 class UPlayerStatsComponent;
@@ -30,6 +31,7 @@ public:
 
 	FORCEINLINE  UPlayerStatsComponent* GetPlayerStats() const { return PlayerStats; }
 	FORCEINLINE  UHealthComponent* GetHealthComponent() const { return Health; }
+	FORCEINLINE  UInventoryComponent* GetInventoryComponent() const { return Inventory; }
 
 	void HandleDeath();
 
@@ -47,5 +49,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
 	UHealthComponent* Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+	UInventoryComponent* Inventory;
 };
 

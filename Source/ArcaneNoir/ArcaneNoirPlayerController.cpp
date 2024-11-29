@@ -11,6 +11,7 @@
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
 #include "HealthComponent.h"
+#include "InventoryComponent.h"
 #include "PlayerStatsComponent.h"
 #include "Engine/LocalPlayer.h"
 
@@ -215,16 +216,10 @@ void AArcaneNoirPlayerController::OnTestInputStarted()
 		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
 		if (ArcaneCharacter == nullptr)
 			return;
-		
-		UPlayerStatsComponent* PlayerStat = ArcaneCharacter->GetPlayerStats();
-		
-		 if (PlayerStat == nullptr)
-		 	return;
 
-		UHealthComponent* Health = ArcaneCharacter->GetHealthComponent();
-		if (Health == nullptr)
-			return;
-		Health->TakeDamage(5);
-		 //PlayerStat->AddExperience(5);
+		UInventoryComponent* Inventory = ArcaneCharacter->GetInventoryComponent();
+		if (Inventory != nullptr)
+		{
+		}
 	}
 }
