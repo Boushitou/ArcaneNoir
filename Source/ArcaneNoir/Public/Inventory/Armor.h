@@ -9,6 +9,13 @@
 /**
  * 
  */
+UENUM()
+enum ArmorType
+{
+	Fedora,
+	Jacket
+};
+
 UCLASS()
 class ARCANENOIR_API UArmor : public UEquipement
 {
@@ -20,4 +27,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Armor")
 	int32 Armor;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Armor")
+	TEnumAsByte<ArmorType> Type;
 };

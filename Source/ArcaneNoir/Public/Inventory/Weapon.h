@@ -9,6 +9,14 @@
 /**
  * 
  */
+UENUM()
+enum WeaponType
+{
+	Revolver,
+	SwordCane,
+	Dagger
+};
+
 UCLASS()
 class ARCANENOIR_API UWeapon : public UEquipement
 {
@@ -26,4 +34,6 @@ public:
 	float AttackSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	TMap<FString, int32> AttributeRequired;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
+	TEnumAsByte<WeaponType> Type;
 };

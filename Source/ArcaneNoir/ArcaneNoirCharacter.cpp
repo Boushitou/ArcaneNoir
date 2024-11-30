@@ -3,7 +3,7 @@
 #include "ArcaneNoirCharacter.h"
 
 #include "HealthComponent.h"
-#include "InventoryComponent.h"
+#include "Inventory/InventoryComponent.h"
 #include "PlayerStatsComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"

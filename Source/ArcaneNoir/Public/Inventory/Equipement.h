@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "Inventory/Item.h"
 #include "Equipement.generated.h"
 
 /**
  * 
  */
+
 UCLASS()
 class ARCANENOIR_API UEquipement : public UItem
 {

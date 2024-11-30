@@ -11,7 +11,6 @@
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
 #include "HealthComponent.h"
-#include "InventoryComponent.h"
 #include "PlayerStatsComponent.h"
 #include "Engine/LocalPlayer.h"
 
@@ -35,6 +34,7 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
+	
 
 	// Add Input Mapping Context
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
@@ -216,10 +216,16 @@ void AArcaneNoirPlayerController::OnTestInputStarted()
 		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
 		if (ArcaneCharacter == nullptr)
 			return;
-
-		UInventoryComponent* Inventory = ArcaneCharacter->GetInventoryComponent();
-		if (Inventory != nullptr)
-		{
-		}
+		//
+		// UInventoryComponent* Inventory = ArcaneCharacter->GetInventoryComponent();
+		// if (Inventory != nullptr)
+		// {
+		// 	UItem* item = NewObject<UItem>();
+		// 	item->Name = TEXT("Test item");
+		// 	item->GridWidth = 1;
+		// 	item->GridHeight = 4;
+		//
+		// 	Inventory->AddItem(item, 0, 0);
+		// }
 	}
 }

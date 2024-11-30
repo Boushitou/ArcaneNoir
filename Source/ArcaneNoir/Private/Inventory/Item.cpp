@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Item.h"
+#include "Inventory/Item.h"
 
 UItem::UItem(): Name(TEXT("Unamed")), GridWidth(0), GridHeight(0), Icon(nullptr)
 {
