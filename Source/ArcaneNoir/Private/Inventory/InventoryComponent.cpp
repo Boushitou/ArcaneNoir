@@ -6,8 +6,8 @@
 
 UInventoryComponent::UInventoryComponent()
 {
-	InitializeInventory();
 	PrimaryComponentTick.bCanEverTick = false;
+	InventoryStateChanged = false;
 }
 
 
@@ -15,7 +15,7 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	
+	InitializeInventory();
 }
 
 
@@ -26,75 +26,90 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	// ...
 }
 
-void UInventoryComponent::InitializeInventory()
+bool UInventoryComponent::TryAddItem(TSharedPtr<UItem> Item)
 {
-	InventoryArray.SetNum(RowSize);
-	for (TArray<TSharedPtr<UItem>>& CurrentRow : InventoryArray)
-	{
-		CurrentRow.SetNum(ColumnSize);
-	}
-
-	for (int32 i = 0; i < RowSize; i++)
-	{
-		for (int32 j = 0; j < ColumnSize; j++)
-		{
-			InventoryArray[i][j] = nullptr;
-		}
-	}
-	
-	CurrentlyHeldItem = nullptr;
-}
-
-TSharedPtr<UItem> UInventoryComponent::GetItem(int i, int j)
-{
-	return InventoryArray[i][j];
-}
-
-bool UInventoryComponent::TryAddItem(TSharedPtr<UItem> item)
-{
-	return true;
-}
-
-void UInventoryComponent::AddItem(TSharedPtr<UItem> item, int startRow, int startCol)
-{
-	if (item == nullptr || !CanItemFitAt(item, startRow, startCol))
-		return;
-
-	for (int32 i = 0; i < item->GridHeight; i++)
-	{
-		for (int32 j = 0; j < item->GridHeight; j++)
-		{
-			InventoryArray[startRow +i][startCol + j] = item;
-		}
-	}
-	
-	CurrentlyHeldItem = nullptr;
-}
-
-void UInventoryComponent::RemoveItem(TSharedPtr<UItem> item, int startRow, int startCol)
-{
-	InventoryArray[startRow][startCol] = nullptr;
-	CurrentlyHeldItem = item;
-}
-
-bool UInventoryComponent::CanItemFitAt(TSharedPtr<UItem> item, int32 startRow, int32 startCol)
-{
-	if (item == nullptr || startRow < 0 || startCol < 0
-		|| startRow + item->GridHeight > RowSize || startCol + item->GridWidth > ColumnSize)
+	if (Item == nullptr)
 		return false;
 
-	for (int32 i = 0; i < item->GridHeight; i++)
+	for (int32 i = 0; i < Items.Num(); i++)
 	{
-		for (int32 j = 0; j < item->GridHeight; j++)
+		if (!IsRoomAvailable(Item, i))
+		return false;
+
+		AddItemAt(Item, i);
+		break;
+	}
+	
+	return false;
+}
+
+bool UInventoryComponent::IsRoomAvailable(TSharedPtr<UItem> Item, int32 TopLeftIndex)
+{
+	FIntPoint ItemSize = Item->GetSize();
+	FTile Tile = IndexToTile(TopLeftIndex);
+
+	for (int32 j = Tile.X; j < ItemSize.X + Tile.X; j++)
+	{
+		for (int32 k = Tile.Y; k < ItemSize.Y + Tile.Y; k++)
 		{
-			if (InventoryArray[startRow + i][startCol + j] != nullptr)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Can't place another item here !"));
+			if (!Items.IsValidIndex(TileToIndex(Tile)))
 				return false;
-			}
+			
+			if (GetItemAtIndex(TileToIndex(Tile)) != nullptr)
+				return false;
 		}
 	}
 	
 	return true;
 }
 
+bool UInventoryComponent::IsTileValid(FTile Tile)
+{
+	if (Tile.X < 0 || Tile.X >= ColumnSize || Tile.Y < 0 || Tile.Y >= RowSize)
+		return false;
+	
+	return true;
+}
+
+const FTile UInventoryComponent::IndexToTile(int32 Index)
+{
+	FTile tile;
+
+	tile.X = Index % ColumnSize;
+	tile.Y = Index / ColumnSize;
+	
+	return tile;
+}
+
+const int32 UInventoryComponent::TileToIndex(FTile Tile)
+{
+	return Tile.X + Tile.Y * ColumnSize;
+}
+
+TSharedPtr<UItem> UInventoryComponent::GetItemAtIndex(int32 Index)
+{
+	if (!Items.IsValidIndex(Index))
+		return nullptr;
+	
+	return Items[Index];
+}
+
+void UInventoryComponent::AddItemAt(TSharedPtr<UItem> Item, int32 TopLeftIndex)
+{
+	FIntPoint ItemSize = Item->GetSize();
+	FTile Tile = IndexToTile(TopLeftIndex);
+
+	for (int32 j = Tile.X; j < ItemSize.X + Tile.X; j++)
+	{
+		for (int32 k = Tile.Y; k < ItemSize.Y + Tile.Y; k++)
+		{
+			Items[TileToIndex(FTile{ j, k })] = Item;
+		}
+	}
+	InventoryStateChanged = true;
+}
+
+void UInventoryComponent::InitializeInventory()
+{
+	Items.Init(nullptr, RowSize * ColumnSize);
+}

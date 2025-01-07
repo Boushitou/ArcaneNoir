@@ -6,6 +6,15 @@
 #include "Components/ActorComponent.h"
 #include "InventoryComponent.generated.h"
 
+USTRUCT()
+struct FTile
+{
+	GENERATED_BODY()
+
+	int32 X;
+	int32 Y;
+};
+
 class UItem;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARCANENOIR_API UInventoryComponent : public UActorComponent
@@ -24,20 +33,22 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void InitializeInventory();
-	TSharedPtr<UItem> GetItem(int i, int j);
-
-	bool TryAddItem(TSharedPtr<UItem> item);
-	void AddItem(TSharedPtr<UItem> item, int startRow, int startCol);
-	void RemoveItem(TSharedPtr<UItem> item, int startRow, int startCol);
-	bool CanItemFitAt(TSharedPtr<UItem> item, int32 startRow, int32 startCol);
-
+	bool TryAddItem(TSharedPtr<UItem> Item);
+	bool IsRoomAvailable(TSharedPtr<UItem> Item, int32 TopLeftIndex);
+	bool IsTileValid(FTile Tile);
+	const FTile IndexToTile(int32 Index);
+	const int32 TileToIndex(FTile Tile);
+	void AddItemAt(TSharedPtr<UItem> Item, int32 TopLeftIndex);
+	
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
 	int32 RowSize;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
 	int32 ColumnSize;
-	
-	TArray<TArray<TSharedPtr<UItem>>> InventoryArray;
-	TSharedPtr<UItem> CurrentlyHeldItem;
+
+	bool InventoryStateChanged;
+	TArray<TSharedPtr<UItem>> Items;
+
+	void InitializeInventory();
+	TSharedPtr<UItem> GetItemAtIndex(int32 Index);
 };

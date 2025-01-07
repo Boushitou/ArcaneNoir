@@ -25,4 +25,6 @@ public:
 	int32 GridHeight;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	UTexture2D* Icon;
+
+	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(GridWidth, GridHeight); }
 };
