@@ -90,10 +90,15 @@ protected:
 
 	void OnTestInputStarted(); //It's only for testing purpose and see if the leveling system works.
 
+protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AHUD* ArcaneNoirHUD;
 private:
 	FVector CachedDestination;
 	
 	float FollowTime; // For how long it has been pressed
+
 };
 
 

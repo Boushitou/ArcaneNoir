@@ -10,7 +10,7 @@
  * 
  */
 UENUM()
-enum WeaponType
+enum class EWeaponType : uint8
 {
 	Revolver,
 	SwordCane,
@@ -33,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	float AttackSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
-	TMap<FString, int32> AttributeRequired;
+	TMap<FGuid, int32> AttributeRequired;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
-	TEnumAsByte<WeaponType> Type;
+	EWeaponType Type;
 };
