@@ -25,10 +25,12 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void InitializeInventory();
-	UItem* GetItem(int i, int j);
-	void AddItem(UItem* item, int startRow, int startCol);
-	void RemoveItem(UItem* item, int startRow, int startCol);
-	bool CanItemFitAt(UItem* item, int32 startRow, int32 startCol);
+	TSharedPtr<UItem> GetItem(int i, int j);
+
+	bool TryAddItem(TSharedPtr<UItem> item);
+	void AddItem(TSharedPtr<UItem> item, int startRow, int startCol);
+	void RemoveItem(TSharedPtr<UItem> item, int startRow, int startCol);
+	bool CanItemFitAt(TSharedPtr<UItem> item, int32 startRow, int32 startCol);
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
@@ -36,6 +38,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
 	int32 ColumnSize;
 	
-	TArray<TArray<UItem*>> InventoryArray;
-	UItem* CurrentlyHeldItem;
+	TArray<TArray<TSharedPtr<UItem>>> InventoryArray;
+	TSharedPtr<UItem> CurrentlyHeldItem;
 };

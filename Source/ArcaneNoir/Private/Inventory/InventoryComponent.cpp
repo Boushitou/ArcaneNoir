@@ -29,7 +29,7 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 void UInventoryComponent::InitializeInventory()
 {
 	InventoryArray.SetNum(RowSize);
-	for (TArray<UItem*>& CurrentRow : InventoryArray)
+	for (TArray<TSharedPtr<UItem>>& CurrentRow : InventoryArray)
 	{
 		CurrentRow.SetNum(ColumnSize);
 	}
@@ -45,12 +45,17 @@ void UInventoryComponent::InitializeInventory()
 	CurrentlyHeldItem = nullptr;
 }
 
-UItem* UInventoryComponent::GetItem(int i, int j)
+TSharedPtr<UItem> UInventoryComponent::GetItem(int i, int j)
 {
 	return InventoryArray[i][j];
 }
 
-void UInventoryComponent::AddItem(UItem* item, int startRow, int startCol)
+bool UInventoryComponent::TryAddItem(TSharedPtr<UItem> item)
+{
+	return true;
+}
+
+void UInventoryComponent::AddItem(TSharedPtr<UItem> item, int startRow, int startCol)
 {
 	if (item == nullptr || !CanItemFitAt(item, startRow, startCol))
 		return;
@@ -66,13 +71,13 @@ void UInventoryComponent::AddItem(UItem* item, int startRow, int startCol)
 	CurrentlyHeldItem = nullptr;
 }
 
-void UInventoryComponent::RemoveItem(UItem* item, int startRow, int startCol)
+void UInventoryComponent::RemoveItem(TSharedPtr<UItem> item, int startRow, int startCol)
 {
 	InventoryArray[startRow][startCol] = nullptr;
 	CurrentlyHeldItem = item;
 }
 
-bool UInventoryComponent::CanItemFitAt(UItem* item, int32 startRow, int32 startCol)
+bool UInventoryComponent::CanItemFitAt(TSharedPtr<UItem> item, int32 startRow, int32 startCol)
 {
 	if (item == nullptr || startRow < 0 || startCol < 0
 		|| startRow + item->GridHeight > RowSize || startCol + item->GridWidth > ColumnSize)
