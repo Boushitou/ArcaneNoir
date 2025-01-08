@@ -23,11 +23,19 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MeshComponent;
-	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision, meta = (AllowPrivateAccess = "true"))
 	USphereComponent* CollisionComponent;
 
 	TSharedPtr<UItem> ItemObject;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	FString Name;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	int32 GridWidth;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	int32 GridHeight;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	UMaterialInterface* Icon;
 
 	virtual TSharedPtr<UItem> GetDefaultItemObject();
 

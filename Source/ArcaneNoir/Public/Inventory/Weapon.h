@@ -9,14 +9,7 @@
 /**
  * 
  */
-UENUM()
-enum class EWeaponType : uint8
-{
-	Revolver,
-	SwordCane,
-	Dagger
-};
-
+class AWeaponActor;
 UCLASS()
 class ARCANENOIR_API UWeapon : public UEquipement
 {
@@ -26,14 +19,11 @@ public:
 
 	UWeapon();
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	int32 MinDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	int32 MaxDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	float AttackSpeed;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
 	TMap<FGuid, int32> AttributeRequired;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
-	EWeaponType Type;
+
+	TSubclassOf<AWeaponActor> WeaponActorClass;
+
 };

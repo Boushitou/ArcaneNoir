@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Item.generated.h"
 
+class AItemActor;
 /**
  * 
  */
@@ -17,14 +18,12 @@ class ARCANENOIR_API UItem : public UObject
 public:
 	UItem();
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	FString Name;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	int32 GridWidth;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	int32 GridHeight;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
-	UTexture2D* Icon;
+	TSharedPtr<UMaterialInterface>* Icon;
+
+	TSubclassOf<AItemActor> ItemActorClass;
 
 	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(GridWidth, GridHeight); }
 };

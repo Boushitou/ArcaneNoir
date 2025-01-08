@@ -25,8 +25,9 @@ public:
 
 	UArmor();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Armor")
 	int32 Armor;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Armor")
 	EArmorType Type;
+
+	//TSubclassOf<AItemActor> ItemActorClass;
+
 };

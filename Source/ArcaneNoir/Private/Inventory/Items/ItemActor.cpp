@@ -13,8 +13,11 @@ AItemActor::AItemActor()
 	PrimaryActorTick.bCanEverTick = true;
 
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	MeshComponent->SetMobility(EComponentMobility::Type::Stationary);
+	
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
 	CollisionComponent->SetupAttachment(MeshComponent);
+	CollisionComponent->SetMobility(EComponentMobility::Type::Stationary);
 }
 
 // Called when the game starts or when spawned
