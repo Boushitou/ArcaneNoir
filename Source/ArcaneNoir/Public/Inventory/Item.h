@@ -21,7 +21,7 @@ public:
 	FString Name;
 	int32 GridWidth;
 	int32 GridHeight;
-	TSharedPtr<UMaterialInterface>* Icon;
+	TSharedPtr<UTexture> Icon;
 
 	TSubclassOf<AItemActor> ItemActorClass;
 

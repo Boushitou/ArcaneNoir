@@ -24,5 +24,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	virtual TSharedPtr<UItem> GetDefaultItemObject() override;
+	virtual UItem* GetDefaultItemObject() override;
 };

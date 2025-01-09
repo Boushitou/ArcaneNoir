@@ -10,9 +10,6 @@ ASwordCaneActor::ASwordCaneActor()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	GridWidth = 1;
-	GridHeight = 4;
 }
 
 // Called when the game starts or when spawned
@@ -28,9 +25,10 @@ void ASwordCaneActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-TSharedPtr<UItem> ASwordCaneActor::GetDefaultItemObject()
+UItem* ASwordCaneActor::GetDefaultItemObject()
 {
-	TSharedPtr<UWeapon> SwordCane = TSharedPtr<UWeapon>(NewObject<UWeapon>(this));
+	UWeapon* SwordCane = NewObject<UWeapon>(this);
+
 	SwordCane->MinDamage = 10;
 	SwordCane->MaxDamage = 20;
 	SwordCane->AttackSpeed = 1.5f;
@@ -38,6 +36,7 @@ TSharedPtr<UItem> ASwordCaneActor::GetDefaultItemObject()
 
 	SwordCane->GridWidth = GridWidth;
 	SwordCane->GridHeight = GridHeight;
+	SwordCane->Name = Name;
 	
 	return SwordCane;
 }

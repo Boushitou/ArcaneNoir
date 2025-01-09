@@ -33,12 +33,12 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	bool TryAddItem(TSharedPtr<UItem> Item);
-	bool IsRoomAvailable(TSharedPtr<UItem> Item, int32 TopLeftIndex);
+	bool TryAddItem(UItem* Item);
+	bool IsRoomAvailable(UItem* Item, int32 TopLeftIndex);
 	bool IsTileValid(FTile Tile);
 	const FTile IndexToTile(int32 Index);
 	const int32 TileToIndex(FTile Tile);
-	void AddItemAt(TSharedPtr<UItem> Item, int32 TopLeftIndex);
+	void AddItemAt(UItem* Item, int32 TopLeftIndex);
 	
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
@@ -47,8 +47,8 @@ private:
 	int32 ColumnSize;
 
 	bool InventoryStateChanged;
-	TArray<TSharedPtr<UItem>> Items;
+	TArray<UItem*> Items;
 
 	void InitializeInventory();
-	TSharedPtr<UItem> GetItemAtIndex(int32 Index);
+	UItem* GetItemAtIndex(int32 Index);
 };

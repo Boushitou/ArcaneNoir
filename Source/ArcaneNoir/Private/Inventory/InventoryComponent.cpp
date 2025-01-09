@@ -26,24 +26,27 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	// ...
 }
 
-bool UInventoryComponent::TryAddItem(TSharedPtr<UItem> Item)
+bool UInventoryComponent::TryAddItem(UItem* Item)
 {
 	if (Item == nullptr)
 		return false;
-
+	
 	for (int32 i = 0; i < Items.Num(); i++)
 	{
 		if (!IsRoomAvailable(Item, i))
-		return false;
+		{
+			UE_LOG(LogTemp, Log, TEXT("Room is not available !"));
+			continue;
+		}
 
 		AddItemAt(Item, i);
-		break;
+		return true;
 	}
 	
 	return false;
 }
 
-bool UInventoryComponent::IsRoomAvailable(TSharedPtr<UItem> Item, int32 TopLeftIndex)
+bool UInventoryComponent::IsRoomAvailable(UItem* Item, int32 TopLeftIndex)
 {
 	FIntPoint ItemSize = Item->GetSize();
 	FTile Tile = IndexToTile(TopLeftIndex);
@@ -83,10 +86,11 @@ const FTile UInventoryComponent::IndexToTile(int32 Index)
 
 const int32 UInventoryComponent::TileToIndex(FTile Tile)
 {
+	UE_LOG(LogTemp, Log, TEXT("Index = %d"), Tile.X + Tile.Y * ColumnSize);
 	return Tile.X + Tile.Y * ColumnSize;
 }
 
-TSharedPtr<UItem> UInventoryComponent::GetItemAtIndex(int32 Index)
+UItem* UInventoryComponent::GetItemAtIndex(int32 Index)
 {
 	if (!Items.IsValidIndex(Index))
 		return nullptr;
@@ -94,16 +98,17 @@ TSharedPtr<UItem> UInventoryComponent::GetItemAtIndex(int32 Index)
 	return Items[Index];
 }
 
-void UInventoryComponent::AddItemAt(TSharedPtr<UItem> Item, int32 TopLeftIndex)
+void UInventoryComponent::AddItemAt(UItem* Item, int32 TopLeftIndex)
 {
+	//UE_LOG(LogTemp, Log, TEXT("Item name is %s"), *Item->Name);
 	FIntPoint ItemSize = Item->GetSize();
 	FTile Tile = IndexToTile(TopLeftIndex);
 
-	for (int32 j = Tile.X; j < ItemSize.X + Tile.X; j++)
+	for (int32 i = Tile.X; i < ItemSize.X + Tile.X; i++)
 	{
-		for (int32 k = Tile.Y; k < ItemSize.Y + Tile.Y; k++)
+		for (int32 j = Tile.Y; j < ItemSize.Y + Tile.Y; j++)
 		{
-			Items[TileToIndex(FTile{ j, k })] = Item;
+			Items[TileToIndex(FTile{ i, j })] = Item;
 		}
 	}
 	InventoryStateChanged = true;
