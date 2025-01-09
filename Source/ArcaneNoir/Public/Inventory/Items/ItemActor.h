@@ -5,9 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
+#include "Inventory/Item.h"
 #include "ItemActor.generated.h"
 
-class UItem;
 UCLASS()
 class ARCANENOIR_API AItemActor : public AActor
 {
@@ -26,16 +26,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision, meta = (AllowPrivateAccess = "true"))
 	USphereComponent* CollisionComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FItemData ItemData;
+	
 	UItem* ItemObject;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
-	FString Name;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
-	int32 GridWidth;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
-	int32 GridHeight;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
-	UTexture* Icon;
 
 	virtual UItem* GetDefaultItemObject();
 

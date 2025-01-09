@@ -6,19 +6,21 @@
 #include "Equipement.h"
 #include "Weapon.generated.h"
 
-USTRUCT(BlueprintType)
+USTRUCT(Blueprintable)
 struct FWeaponData
 {
 	GENERATED_BODY()
-
-	FEquipementData EquipementData;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	int32 MinDamage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	int32 MaxDamage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon, meta = (AllowPrivateAccess = "true"))
 	float AttackSpeed;
 };
 
 class AWeaponActor;
-UCLASS()
+UCLASS(BlueprintType)
 class ARCANENOIR_API UWeapon : public UEquipement
 {
 	GENERATED_BODY()
@@ -26,6 +28,7 @@ class ARCANENOIR_API UWeapon : public UEquipement
 public:
 
 	UWeapon();
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
 	FWeaponData WeaponData;
 };

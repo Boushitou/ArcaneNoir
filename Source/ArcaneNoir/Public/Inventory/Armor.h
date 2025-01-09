@@ -6,15 +6,15 @@
 #include "Equipement.h"
 #include "Armor.generated.h"
 
-USTRUCT(BlueprintType)
+USTRUCT(Blueprintable)
 struct FArmorData
 {
 	GENERATED_BODY()
-	FEquipementData EquipementData;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor, meta = (AllowPrivateAccess = "true"))
 	int32 Armor;
 };
 
-UCLASS()
+UCLASS(BlueprintType)
 class ARCANENOIR_API UArmor : public UEquipement
 {
 	GENERATED_BODY()
@@ -23,6 +23,7 @@ public:
 
 	UArmor();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
 	FArmorData ArmorData;
 
 };

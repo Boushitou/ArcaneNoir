@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "ItemActor.h"
+#include "Inventory/Weapon.h"
 #include "WeaponActor.generated.h"
 
 UCLASS()
@@ -19,10 +20,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	int32 MinDamage;
-	int32 MaxDamage;
-	float AttackSpeed;
-	TMap<FGuid, int32> AttributeRequired;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FWeaponData WeaponData;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	FEquipementData EquipementData;
 
 public:
 	// Called every frame

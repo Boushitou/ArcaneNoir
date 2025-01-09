@@ -6,6 +6,14 @@
 #include "Components/ActorComponent.h"
 #include "PlayerStatsComponent.generated.h"
 
+UENUM(BlueprintType)
+enum class EAttributeType : uint8
+{
+	Strength UMETA(DisplayName = "Strength"),
+	Dexterity UMETA(DisplayName = "Dexterity"),
+	Vitality UMETA(DisplayName = "Vitality"),
+	Intelligence UMETA(DisplayName = "Intelligence")
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARCANENOIR_API UPlayerStatsComponent : public UActorComponent
@@ -42,6 +50,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Balancing")
 	float XpFactor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	TMap<EAttributeType, int32> AttributesRequirement;
 	
 	FORCEINLINE const int32& GetLevel() { return Level; }
 	FORCEINLINE const int32& GetStrength() { return Strength; }
@@ -59,6 +70,7 @@ public:
 
 	void LevelUp();
 	void AddExperience(int32 amount);
+	bool HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const;
 
 private:
 

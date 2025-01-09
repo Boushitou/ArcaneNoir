@@ -5,5 +5,4 @@
 
 UArmor::UArmor()
 {
-	ArmorData.Armor = 0;
 }

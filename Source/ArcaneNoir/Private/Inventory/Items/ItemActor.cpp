@@ -4,7 +4,6 @@
 #include "Inventory/Items/ItemActor.h"
 #include "ArcaneNoir/ArcaneNoirCharacter.h"
 #include "Inventory/InventoryComponent.h"
-#include "Inventory/Item.h"
 
 // Sets default values
 AItemActor::AItemActor()

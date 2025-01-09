@@ -51,3 +51,17 @@ void UPlayerStatsComponent::AddExperience(int32 amount)
 		LevelUp();
 }
 
+bool UPlayerStatsComponent::HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const
+{
+	for (const auto& Attribute : RequiredAttributes)
+	{
+		if (AttributesRequirement.Contains(Attribute.Key))
+		{
+			if (AttributesRequirement[Attribute.Key] < Attribute.Value)
+				return false;
+		}
+	}
+
+	return true;
+}
+

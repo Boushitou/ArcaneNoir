@@ -16,7 +16,6 @@ ASwordCaneActor::ASwordCaneActor()
 void ASwordCaneActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -29,14 +28,14 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 {
 	UWeapon* SwordCane = NewObject<UWeapon>(this);
 
-	SwordCane->WeaponData.MinDamage = 10;
-	SwordCane->WeaponData.MaxDamage = 20;
-	SwordCane->WeaponData.AttackSpeed = 1.5f;
-	//SwordCane->AttributeRequired.Add(FGuid(), 10);
-
-	SwordCane->WeaponData.EquipementData.ItemData.GridWidth = GridWidth;
-	SwordCane->WeaponData.EquipementData.ItemData.GridHeight = GridHeight;
-	SwordCane->WeaponData.EquipementData.ItemData.Name = Name;
+	WeaponData.MinDamage = 10;
+	WeaponData.MaxDamage = 20;
+	WeaponData.AttackSpeed = 1.5f;
+	
+	ItemData.Name = "Sword Cane";
+	ItemData.GridWidth = 1;
+	ItemData.GridHeight = 4;
+	//WeaponData.EquipementData.AttributeRequired = TMap<FGuid, int32>();
 	
 	return SwordCane;
 }

@@ -5,7 +5,4 @@
 
 UWeapon::UWeapon()
 {
-	WeaponData.AttackSpeed = 1.0f;
-	WeaponData.MaxDamage = 1;
-	WeaponData.MinDamage = 1;
 }

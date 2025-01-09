@@ -7,7 +7,6 @@
 UInventoryComponent::UInventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	InventoryStateChanged = false;
 }
 
 
@@ -111,7 +110,12 @@ void UInventoryComponent::AddItemAt(UItem* Item, int32 TopLeftIndex)
 			Items[TileToIndex(FTile{ i, j })] = Item;
 		}
 	}
-	InventoryStateChanged = true;
+	OnInventoryChanged.Broadcast();
+}
+
+void UInventoryComponent::RemoveItem(UItem* Item)
+{
+	//nothing yet.
 }
 
 void UInventoryComponent::InitializeInventory()
