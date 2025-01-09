@@ -3,6 +3,9 @@
 
 #include "Inventory/Weapon.h"
 
-UWeapon::UWeapon(): MinDamage(0), MaxDamage(0), AttackSpeed(0)
+UWeapon::UWeapon()
 {
+	WeaponData.AttackSpeed = 1.0f;
+	WeaponData.MaxDamage = 1;
+	WeaponData.MinDamage = 1;
 }

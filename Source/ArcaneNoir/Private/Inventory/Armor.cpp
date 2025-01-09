@@ -3,6 +3,7 @@
 
 #include "Inventory/Armor.h"
 
-UArmor::UArmor(): Armor(0)
+UArmor::UArmor()
 {
+	ArmorData.Armor = 0;
 }

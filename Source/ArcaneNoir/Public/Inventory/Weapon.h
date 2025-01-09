@@ -6,9 +6,17 @@
 #include "Equipement.h"
 #include "Weapon.generated.h"
 
-/**
- * 
- */
+USTRUCT(BlueprintType)
+struct FWeaponData
+{
+	GENERATED_BODY()
+
+	FEquipementData EquipementData;
+	int32 MinDamage;
+	int32 MaxDamage;
+	float AttackSpeed;
+};
+
 class AWeaponActor;
 UCLASS()
 class ARCANENOIR_API UWeapon : public UEquipement
@@ -19,11 +27,5 @@ public:
 
 	UWeapon();
 	
-	int32 MinDamage;
-	int32 MaxDamage;
-	float AttackSpeed;
-	TMap<FGuid, int32> AttributeRequired;
-
-	TSubclassOf<AWeaponActor> WeaponActorClass;
-
+	FWeaponData WeaponData;
 };

@@ -3,6 +3,11 @@
 
 #include "Inventory/Item.h"
 
-UItem::UItem(): Name(TEXT("Unamed")), GridWidth(0), GridHeight(0), Icon(nullptr)
+UItem::UItem()
 {
+	ItemData.Name = "Unamed Item";
+	ItemData.GridWidth = 1;
+	ItemData.GridHeight = 1;
+	ItemData.Icon = nullptr;
+	ItemData.ItemActorClass = nullptr;
 }

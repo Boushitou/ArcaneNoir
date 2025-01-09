@@ -29,14 +29,14 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 {
 	UWeapon* SwordCane = NewObject<UWeapon>(this);
 
-	SwordCane->MinDamage = 10;
-	SwordCane->MaxDamage = 20;
-	SwordCane->AttackSpeed = 1.5f;
+	SwordCane->WeaponData.MinDamage = 10;
+	SwordCane->WeaponData.MaxDamage = 20;
+	SwordCane->WeaponData.AttackSpeed = 1.5f;
 	//SwordCane->AttributeRequired.Add(FGuid(), 10);
 
-	SwordCane->GridWidth = GridWidth;
-	SwordCane->GridHeight = GridHeight;
-	SwordCane->Name = Name;
+	SwordCane->WeaponData.EquipementData.ItemData.GridWidth = GridWidth;
+	SwordCane->WeaponData.EquipementData.ItemData.GridHeight = GridHeight;
+	SwordCane->WeaponData.EquipementData.ItemData.Name = Name;
 	
 	return SwordCane;
 }

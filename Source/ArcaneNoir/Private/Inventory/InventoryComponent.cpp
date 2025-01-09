@@ -118,3 +118,17 @@ void UInventoryComponent::InitializeInventory()
 {
 	Items.Init(nullptr, RowSize * ColumnSize);
 }
+
+const void UInventoryComponent::GetItemTiles(TMap<UItem*, FTile>& ItemsMap)
+{
+	for (const auto& Item : Items)
+	{
+		if (Item == nullptr)
+			continue;
+		
+		if (!ItemsMap.Contains(Item))
+		{
+			ItemsMap.Add(Item, IndexToTile(Items.Find(Item)));
+		}
+	}
+}

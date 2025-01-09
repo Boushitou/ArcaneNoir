@@ -3,14 +3,23 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Item.generated.h"
 
 class AItemActor;
-/**
- * 
- */
-UCLASS()
+
+USTRUCT(BlueprintType)
+struct FItemData
+{
+	GENERATED_BODY()
+
+	FString Name;
+	int32 GridWidth;
+	int32 GridHeight;
+	TSharedPtr<UTexture> Icon;
+	TSubclassOf<AItemActor> ItemActorClass;
+};
+
+UCLASS(Blueprintable)
 class ARCANENOIR_API UItem : public UObject
 {
 	GENERATED_BODY()
@@ -18,12 +27,7 @@ class ARCANENOIR_API UItem : public UObject
 public:
 	UItem();
 	
-	FString Name;
-	int32 GridWidth;
-	int32 GridHeight;
-	TSharedPtr<UTexture> Icon;
+	FItemData ItemData;
 
-	TSubclassOf<AItemActor> ItemActorClass;
-
-	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(GridWidth, GridHeight); }
+	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(ItemData.GridWidth, ItemData.GridHeight); }
 };

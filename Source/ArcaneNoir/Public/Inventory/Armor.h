@@ -6,14 +6,12 @@
 #include "Equipement.h"
 #include "Armor.generated.h"
 
-/**
- * 
- */
-UENUM()
-enum class EArmorType : uint8
+USTRUCT(BlueprintType)
+struct FArmorData
 {
-	Fedora,
-	Jacket
+	GENERATED_BODY()
+	FEquipementData EquipementData;
+	int32 Armor;
 };
 
 UCLASS()
@@ -25,9 +23,6 @@ public:
 
 	UArmor();
 
-	int32 Armor;
-	EArmorType Type;
-
-	//TSubclassOf<AItemActor> ItemActorClass;
+	FArmorData ArmorData;
 
 };

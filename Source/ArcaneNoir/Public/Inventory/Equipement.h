@@ -6,9 +6,15 @@
 #include "Inventory/Item.h"
 #include "Equipement.generated.h"
 
-/**
- * 
- */
+USTRUCT(BlueprintType)
+struct FEquipementData
+{
+	GENERATED_BODY()
+
+	FItemData ItemData;
+	int32 RequiredLevel;
+	TMap<FGuid, int32> AttributeRequired;
+};
 
 UCLASS()
 class ARCANENOIR_API UEquipement : public UItem
@@ -18,6 +24,5 @@ class ARCANENOIR_API UEquipement : public UItem
 public:
 	UEquipement();
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Equipement")
-	int32 RequiredLevel;
+	FEquipementData EquipementData;
 };

@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "InventoryComponent.generated.h"
 
-USTRUCT()
+USTRUCT(Blueprintable)
 struct FTile
 {
 	GENERATED_BODY()
@@ -39,7 +39,12 @@ public:
 	const FTile IndexToTile(int32 Index);
 	const int32 TileToIndex(FTile Tile);
 	void AddItemAt(UItem* Item, int32 TopLeftIndex);
-	
+
+	UItem* GetItemAtIndex(int32 Index);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	const void GetItemTiles(TMap<UItem*, FTile>& ItemsMap) ;
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
 	int32 RowSize;
@@ -50,5 +55,4 @@ private:
 	TArray<UItem*> Items;
 
 	void InitializeInventory();
-	UItem* GetItemAtIndex(int32 Index);
 };
