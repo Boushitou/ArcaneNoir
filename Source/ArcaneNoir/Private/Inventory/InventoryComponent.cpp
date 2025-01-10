@@ -49,6 +49,12 @@ bool UInventoryComponent::IsRoomAvailable(UItem* Item, int32 TopLeftIndex)
 {
 	FIntPoint ItemSize = Item->GetSize();
 	FTile Tile = IndexToTile(TopLeftIndex);
+	
+	if (ItemSize.X + Tile.X > ColumnSize || ItemSize.Y + Tile.Y > RowSize)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Item is too big for the inventory !"));
+		return false;
+	}
 
 	for (int32 j = Tile.X; j < ItemSize.X + Tile.X; j++)
 	{
@@ -102,7 +108,7 @@ void UInventoryComponent::AddItemAt(UItem* Item, int32 TopLeftIndex)
 	//UE_LOG(LogTemp, Log, TEXT("Item name is %s"), *Item->Name);
 	FIntPoint ItemSize = Item->GetSize();
 	FTile Tile = IndexToTile(TopLeftIndex);
-
+	
 	for (int32 i = Tile.X; i < ItemSize.X + Tile.X; i++)
 	{
 		for (int32 j = Tile.Y; j < ItemSize.Y + Tile.Y; j++)
@@ -127,12 +133,12 @@ const void UInventoryComponent::GetItemTiles(TMap<UItem*, FTile>& ItemsMap)
 {
 	for (const auto& Item : Items)
 	{
-		if (Item == nullptr)
-			continue;
-		
-		if (!ItemsMap.Contains(Item))
+		if (Item != nullptr)
 		{
-			ItemsMap.Add(Item, IndexToTile(Items.Find(Item)));
+			if (!ItemsMap.Contains(Item))
+			{
+				ItemsMap.Add(Item, IndexToTile(Items.Find(Item)));
+			}
 		}
 	}
 }

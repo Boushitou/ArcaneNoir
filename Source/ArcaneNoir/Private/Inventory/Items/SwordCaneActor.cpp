@@ -32,10 +32,10 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 	WeaponData.MaxDamage = 20;
 	WeaponData.AttackSpeed = 1.5f;
 	
-	ItemData.Name = "Sword Cane";
-	ItemData.GridWidth = 1;
-	ItemData.GridHeight = 4;
 	//WeaponData.EquipementData.AttributeRequired = TMap<FGuid, int32>();
+
+	SwordCane->ItemData = ItemData;
+	SwordCane->WeaponData = WeaponData;
 	
 	return SwordCane;
 }
