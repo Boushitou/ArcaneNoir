@@ -39,4 +39,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	FORCEINLINE UTexture2D* GetIcon() const { return ItemData.Icon; }
+	
+	FORCEINLINE TSubclassOf<AItemActor> GetItemActorClass() const { return ItemData.ItemActorClass; }
 };

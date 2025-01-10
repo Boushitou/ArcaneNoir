@@ -13,6 +13,8 @@ AItemActor::AItemActor()
 
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->SetMobility(EComponentMobility::Type::Stationary);
+
+	MeshComponent->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
 	CollisionComponent->SetupAttachment(MeshComponent);
