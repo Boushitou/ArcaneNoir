@@ -13,9 +13,9 @@ struct FTile
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int32 X;
-	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int32 Y;
 };
 
@@ -38,11 +38,17 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	bool TryAddItem(UItem* Item);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool IsRoomAvailable(UItem* Item, int32 TopLeftIndex);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool IsTileValid(FTile Tile);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	const FTile IndexToTile(int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	const int32 TileToIndex(FTile Tile);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddItemAt(UItem* Item, int32 TopLeftIndex);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	UItem* GetItemAtIndex(int32 Index);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
