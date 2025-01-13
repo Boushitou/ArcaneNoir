@@ -121,7 +121,18 @@ void UInventoryComponent::AddItemAt(UItem* Item, int32 TopLeftIndex)
 
 void UInventoryComponent::RemoveItem(UItem* Item)
 {
-	//nothing yet.
+	if (!IsValid(Item))
+		return;
+
+	for (int i = 0; i < Items.Num(); i++)
+	{
+		if (Items[i] == Item)
+		{
+			Items[i] = nullptr;
+		}
+	}
+
+	OnInventoryChanged.Broadcast();
 }
 
 void UInventoryComponent::InitializeInventory()
