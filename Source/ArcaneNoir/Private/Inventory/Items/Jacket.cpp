@@ -32,7 +32,7 @@ UItem* AJacket::GetDefaultItemObject()
 
 	Jacket->ItemData = ItemData;
 	Jacket->ArmorData = ArmorData;
-	Jacket->ItemData.ItemActorClass = AJacket::StaticClass();
+	Jacket->ItemData.ItemActorClass = ItemActorClass;
 
 	return Jacket;
 }

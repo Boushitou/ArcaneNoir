@@ -10,13 +10,6 @@ ASwordCaneActor::ASwordCaneActor()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> Mesh(TEXT("StaticMesh'/Game/Geometry/Meshes/1M_Cube.1M_Cube'"));
-
-	if (Mesh.Succeeded())
-	{
-		MeshComponent->SetStaticMesh(Mesh.Object);		
-	}
 }
 
 // Called when the game starts or when spawned
@@ -41,9 +34,9 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 	
 	//WeaponData.EquipementData.AttributeRequired = TMap<FGuid, int32>();
 
-	SwordCane->ItemData.ItemActorClass = ASwordCaneActor::StaticClass();
 	SwordCane->ItemData = ItemData;
 	SwordCane->WeaponData = WeaponData;
+	SwordCane->ItemData.ItemActorClass = ItemActorClass;
 	
 	return SwordCane;
 }
