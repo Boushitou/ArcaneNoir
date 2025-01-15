@@ -18,7 +18,7 @@ public class ArcaneNoir : ModuleRules
 	        "AIModule", 
 	        "Niagara", 
 	        "EnhancedInput",
-	        "Gameplaytasks"
+	        "GameplayTasks"
         });
     }
 }

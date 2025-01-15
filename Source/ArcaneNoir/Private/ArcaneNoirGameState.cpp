@@ -9,6 +9,11 @@
 
 void AArcaneNoirGameState::SpawnItemFromActor(AActor* Actor, UItem* ItemObject)
 {
+	if (!IsValid(Actor) || !IsValid(ItemObject))
+	{
+		return;
+	}
+	
 	FVector SpawnDirection = Actor->GetActorLocation() + (Actor->GetActorForwardVector() * 150.0f);
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
