@@ -60,10 +60,11 @@ bool UInventoryComponent::IsRoomAvailable(UItem* Item, int32 TopLeftIndex)
 	{
 		for (int32 k = Tile.Y; k < ItemSize.Y + Tile.Y; k++)
 		{
-			if (!Items.IsValidIndex(TileToIndex(Tile)))
+			int32 CurrentIndex = TileToIndex(FTile{ j, k });
+			if (!Items.IsValidIndex(CurrentIndex))
 				return false;
 			
-			if (GetItemAtIndex(TileToIndex(Tile)) != nullptr)
+			if (GetItemAtIndex(CurrentIndex) != nullptr)
 				return false;
 		}
 	}
