@@ -135,6 +135,41 @@ void UInventoryComponent::RemoveItem(UItem* Item)
 	OnInventoryChanged.Broadcast();
 }
 
+UItem* UInventoryComponent::ExchangeItem(UItem* Item, int32 TopLeftIndex)
+{
+	if (!IsValid(Item))
+		return nullptr;
+	
+	UItem* ItemExchanged = GetItemAtIndex(TopLeftIndex);
+	int32 ItemExchangedTopLeftIndex = GetFirstItemIndex(ItemExchanged);
+
+	RemoveItem(ItemExchanged); //We remove the item that will be exhanged so we can check if there is room for the new item
+	 if (IsRoomAvailable(Item, TopLeftIndex))
+	 {
+		 AddItemAt(Item, TopLeftIndex);
+	 }
+	 else
+	 {
+	 	AddItemAt(ItemExchanged, ItemExchangedTopLeftIndex); //We put the item back
+	 	ItemExchanged = nullptr;
+	 }
+	
+	return ItemExchanged;
+}
+
+int32 UInventoryComponent::GetFirstItemIndex(UItem* Item)
+{
+	for (int32 i = 0; i < Items.Num(); i++)
+	{
+		if (Items[i] == Item)
+		{
+			return i;
+		}
+	}
+
+	return INDEX_NONE;
+}
+
 void UInventoryComponent::InitializeInventory()
 {
 	Items.Init(nullptr, RowSize * ColumnSize);

@@ -55,6 +55,10 @@ public:
 	const void GetItemTiles(TMap<UItem*, FTile>& ItemsMap) ;
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void RemoveItem(UItem* Item);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	UItem* ExchangeItem(UItem* Item, int32 TopLeftIndex);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	int32 GetFirstItemIndex(UItem* Item);
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryChanged OnInventoryChanged;
