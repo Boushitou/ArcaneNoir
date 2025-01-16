@@ -32,11 +32,13 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 	WeaponData.MaxDamage = 20;
 	WeaponData.AttackSpeed = 1.5f;
 	
-	//WeaponData.EquipementData.AttributeRequired = TMap<FGuid, int32>();
+	EquipementData.AttributeRequired.Add(EAttributeType::Strength, 10);
 
 	SwordCane->ItemData = ItemData;
 	SwordCane->WeaponData = WeaponData;
 	SwordCane->ItemData.ItemActorClass = ItemActorClass;
+	SwordCane->EquipementData.RequiredLevel = 4;
+	SwordCane->EquipementData.AttributeRequired = EquipementData.AttributeRequired;
 	
 	return SwordCane;
 }

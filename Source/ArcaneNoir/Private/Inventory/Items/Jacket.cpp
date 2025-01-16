@@ -29,10 +29,13 @@ UItem* AJacket::GetDefaultItemObject()
 	UArmor* Jacket = NewObject<UArmor>(this);
 
 	ArmorData.Armor = 10;
+	EquipementData.AttributeRequired.Add(EAttributeType::Dexterity, 5);
 
 	Jacket->ItemData = ItemData;
 	Jacket->ArmorData = ArmorData;
 	Jacket->ItemData.ItemActorClass = ItemActorClass;
+	Jacket->EquipementData.RequiredLevel = 5;
+	Jacket->EquipementData.AttributeRequired = EquipementData.AttributeRequired;
 
 	return Jacket;
 }

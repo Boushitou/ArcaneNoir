@@ -12,6 +12,7 @@ struct FEquipementData
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement, meta = (AllowPrivateAccess = "true"))
 	int32 RequiredLevel;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement, meta = (AllowPrivateAccess = "true"))
 	TMap<EAttributeType, int32> AttributeRequired;
