@@ -7,6 +7,14 @@
 
 class AItemActor;
 
+UENUM(BlueprintType)
+enum class EItemType : uint8
+{
+	Basic UMETA(DisplayName = "Basic"),
+	Weapon UMETA(DisplayName = "Weapon"),
+	Armor UMETA(DisplayName = "Armor")
+};
+
 USTRUCT(Blueprintable)
 struct FItemData
 {
@@ -33,6 +41,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
 	FItemData ItemData;
+
+	UPROPERTY(BlueprintReadOnly)
+	EItemType ItemType;
 
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(ItemData.GridWidth, ItemData.GridHeight); }

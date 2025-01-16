@@ -5,4 +5,5 @@
 
 UArmor::UArmor()
 {
+	ItemType = EItemType::Armor;
 }

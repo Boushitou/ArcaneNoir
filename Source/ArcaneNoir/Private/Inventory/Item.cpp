@@ -5,4 +5,5 @@
 
 UItem::UItem()
 {
+	ItemType = EItemType::Basic;
 }

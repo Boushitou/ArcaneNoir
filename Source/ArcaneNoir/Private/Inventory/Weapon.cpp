@@ -5,4 +5,5 @@
 
 UWeapon::UWeapon()
 {
+	ItemType = EItemType::Weapon;
 }
