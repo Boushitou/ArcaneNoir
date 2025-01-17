@@ -24,3 +24,8 @@ void AArmorActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AArmorActor::SetArmorData(FArmorData NewArmorData)
+{
+	ArmorData = NewArmorData;
+}
+

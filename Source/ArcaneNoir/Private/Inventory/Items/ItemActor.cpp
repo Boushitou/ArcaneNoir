@@ -10,10 +10,9 @@ AItemActor::AItemActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->SetMobility(EComponentMobility::Type::Stationary);
-
 	MeshComponent->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
@@ -43,7 +42,9 @@ void AItemActor::Tick(float DeltaTime)
 
 UItem* AItemActor::GetDefaultItemObject()
 {
-	return NewObject<UItem>(this);
+	UItem* NewItem = NewObject<UItem>(this);
+	NewItem->ItemData = ItemData;
+	return NewItem;
 }
 
 void AItemActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -60,6 +61,16 @@ void AItemActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Oth
 			this->Destroy();
 		}
 	}
+}
+
+void AItemActor::SetItemData(FItemData NewItemData)
+{
+	ItemData = NewItemData;
+}
+
+void AItemActor::SetItemObject(UItem* NewItemObject)
+{
+	ItemObject = NewItemObject;
 }
 
 

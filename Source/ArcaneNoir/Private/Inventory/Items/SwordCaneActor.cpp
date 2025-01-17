@@ -27,18 +27,13 @@ void ASwordCaneActor::Tick(float DeltaTime)
 UItem* ASwordCaneActor::GetDefaultItemObject()
 {
 	UWeapon* SwordCane = NewObject<UWeapon>(this);
-
-	WeaponData.MinDamage = 10;
-	WeaponData.MaxDamage = 20;
-	WeaponData.AttackSpeed = 1.5f;
 	
-	EquipementData.AttributeRequired.Add(EAttributeType::Strength, 10);
 
 	SwordCane->ItemData = ItemData;
+	UE_LOG(LogTemp, Log, TEXT("ItemData: %s"), *ItemData.Name);
 	SwordCane->WeaponData = WeaponData;
 	SwordCane->ItemData.ItemActorClass = ItemActorClass;
-	SwordCane->EquipementData.RequiredLevel = 4;
-	SwordCane->EquipementData.AttributeRequired = EquipementData.AttributeRequired;
+	SwordCane->EquipementData = EquipementData;
 	
 	return SwordCane;
 }

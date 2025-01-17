@@ -25,5 +25,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
 	FArmorData ArmorData;
-
 };

@@ -9,6 +9,10 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ArcaneNoirEnemyAIController.h"
 #include "Components/SphereComponent.h"
+#include "Enemy/LootTable.h"
+#include "Inventory/Items/ItemActor.h"
+#include "Inventory/Item.h"
+#include "Inventory/Items/Jacket.h"
 
 
 // Sets default values
@@ -22,6 +26,8 @@ AArcaneNoirEnemy::AArcaneNoirEnemy()
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 	
 	Health = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+
+	LootTable = CreateDefaultSubobject<ULootTable>(TEXT("LootTable"));
 	
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -52,6 +58,7 @@ void AArcaneNoirEnemy::HandleDeath()
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("AAAAAH HE S DEAD!!"));
 	}
 	DisableEnemy();
+	SpawnLoot();
 }
 
 void AArcaneNoirEnemy::DisableEnemy()
@@ -76,6 +83,19 @@ void AArcaneNoirEnemy::EnableEnemy()
 	{
 		AIController->BrainComponent->StartLogic();
 	}
+}
+
+void AArcaneNoirEnemy::SpawnLoot()
+{
+	if (!IsValid(LootTable))
+		return;
+	TSubclassOf<AItemActor> LootClass = LootTable->GetRandomLoot();
+
+	if (!IsValid(LootClass))
+		return;
+
+	FVector SpawnLocation = GetActorLocation();
+	GetWorld()->SpawnActor<AItemActor>(LootClass, SpawnLocation, FRotator::ZeroRotator);
 }
 
 

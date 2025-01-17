@@ -10,9 +10,9 @@ class AItemActor;
 UENUM(BlueprintType)
 enum class EItemType : uint8
 {
-	Basic UMETA(DisplayName = "Basic"),
-	Weapon UMETA(DisplayName = "Weapon"),
-	Armor UMETA(DisplayName = "Armor")
+	Basic = 0 UMETA(DisplayName = "Basic"),
+	Weapon = 1 UMETA(DisplayName = "Weapon"),
+	Armor = 2 UMETA(DisplayName = "Armor")
 };
 
 USTRUCT(Blueprintable)

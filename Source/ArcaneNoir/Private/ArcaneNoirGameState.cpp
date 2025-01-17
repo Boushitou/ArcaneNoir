@@ -23,9 +23,15 @@ void AArcaneNoirGameState::SpawnItemFromActor(AActor* Actor, UItem* ItemObject)
 
 	if (HitResult.bBlockingHit && IsValid(HitResult.GetActor()))
 	{
-		TSubclassOf<ASwordCaneActor> ToSpawn;
 		FVector SpawnLocation = HitResult.ImpactPoint;
+		SpawnLocation.Z += 50.0f;
+		
 		//UE_LOG(LogTemp, Log, TEXT("Spawn location: %s"), *SpawnLocation.ToString());
-		GetWorld()->SpawnActor<AItemActor>(ItemObject->GetItemActorClass(), SpawnLocation, FRotator::ZeroRotator);
+		AItemActor* SpawnedItemActor = GetWorld()->SpawnActor<AItemActor>(ItemObject->GetItemActorClass(), SpawnLocation, FRotator::ZeroRotator);
+		if (IsValid(SpawnedItemActor))
+		{
+			ItemObject->ItemData.Name = "NAME CHANGE TEST.";
+			SpawnedItemActor->SetItemObject(ItemObject);
+		}
 	}
 }

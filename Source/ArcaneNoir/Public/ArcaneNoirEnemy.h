@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ArcaneNoirEnemy.generated.h"
 
+class ULootTable;
 class USphereComponent;
 class UHealthComponent;
 class UBehaviorTree;
@@ -29,6 +30,7 @@ public:
 	void HandleDeath();
 	void DisableEnemy();
 	void EnableEnemy();
+	void SpawnLoot();
 
 	FORCEINLINE UHealthComponent* GetHealthComponent() const { return Health; }
 	FORCEINLINE UBehaviorTree* GetBehaviorTree() const { return BehaviorTree; }
@@ -41,6 +43,9 @@ private:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI, meta = (AllowPrivateAccess = "true"))
 	UBehaviorTree* BehaviorTree;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Loot, meta = (AllowPrivateAccess = "true"))
+	ULootTable* LootTable;
 
 	FVector Origin;
 

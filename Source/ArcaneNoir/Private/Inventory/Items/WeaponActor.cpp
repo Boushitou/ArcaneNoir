@@ -24,3 +24,9 @@ void AWeaponActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AWeaponActor::SetWeaponData(FWeaponData NewWeaponData)
+{
+	WeaponData = NewWeaponData;
+}
+
+
