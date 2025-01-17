@@ -47,6 +47,8 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Loot, meta = (AllowPrivateAccess = "true"))
 	ULootTable* LootTable;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Loot, meta = (AllowPrivateAccess = "true"))
+	int32 Level;
 	FVector Origin;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))

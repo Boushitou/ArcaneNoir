@@ -28,10 +28,5 @@ void AArcaneNoirGameState::SpawnItemFromActor(AActor* Actor, UItem* ItemObject)
 		
 		//UE_LOG(LogTemp, Log, TEXT("Spawn location: %s"), *SpawnLocation.ToString());
 		AItemActor* SpawnedItemActor = GetWorld()->SpawnActor<AItemActor>(ItemObject->GetItemActorClass(), SpawnLocation, FRotator::ZeroRotator);
-		if (IsValid(SpawnedItemActor))
-		{
-			ItemObject->ItemData.Name = "NAME CHANGE TEST.";
-			SpawnedItemActor->SetItemObject(ItemObject);
-		}
 	}
 }

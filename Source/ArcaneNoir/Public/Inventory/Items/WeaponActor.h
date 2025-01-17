@@ -28,7 +28,9 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	FORCEINLINE FWeaponData GetWeaponData() const { return WeaponData; }
 
 protected:
 	void SetWeaponData(FWeaponData NewWeaponData);
+	
 };

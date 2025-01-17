@@ -89,13 +89,9 @@ void AArcaneNoirEnemy::SpawnLoot()
 {
 	if (!IsValid(LootTable))
 		return;
-	TSubclassOf<AItemActor> LootClass = LootTable->GetRandomLoot();
-
-	if (!IsValid(LootClass))
-		return;
-
+	
 	FVector SpawnLocation = GetActorLocation();
-	GetWorld()->SpawnActor<AItemActor>(LootClass, SpawnLocation, FRotator::ZeroRotator);
+	LootTable->GetRandomLoot(Level, SpawnLocation);
 }
 
 

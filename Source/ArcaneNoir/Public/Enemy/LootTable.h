@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Inventory/Items/WeaponActor.h"
 #include "LootTable.generated.h"
 
 class AItemActor;
@@ -33,9 +34,12 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	void GenerateWeaponStats(int32 WeaponLevel, AWeaponActor* WeaponActor);
 
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Loot")
-	TSubclassOf<AItemActor> GetRandomLoot() const;
+	void GetRandomLoot(int32 ActorLevel, FVector SpawnLocation);
+	UFUNCTION(BlueprintCallable, Category = "Loot")
+	void GenerateItemStats(int32 ActorLevel, AItemActor* ItemActor);
 };

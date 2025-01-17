@@ -47,4 +47,6 @@ public:
 	void SetItemData(FItemData NewItemData);
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	void SetItemObject(UItem* NewItemObject);
+
+	FORCEINLINE UItem* GetItemObject() const { return ItemObject; }
 };

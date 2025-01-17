@@ -28,6 +28,8 @@ struct FItemData
 	int32 GridHeight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
 	UTexture2D* Icon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	float Factor; //to be used for stats calculation and make balancing.
 	TSubclassOf<AItemActor> ItemActorClass;
 };
 
@@ -44,6 +46,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	EItemType ItemType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	int32 RandomInterval; //Is used to generate random stats for the item, can be used for balancing.
 
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	FORCEINLINE FIntPoint GetSize() const { return FIntPoint(ItemData.GridWidth, ItemData.GridHeight); }
