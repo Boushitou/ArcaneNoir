@@ -24,13 +24,15 @@ protected:
 	FWeaponData WeaponData;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FEquipementData EquipementData;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int32 RandomInterval;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	FORCEINLINE FWeaponData GetWeaponData() const { return WeaponData; }
+	virtual void GenerateStats(int32 ActorLevel) override;
 
 protected:
 	void SetWeaponData(FWeaponData NewWeaponData);
-	
 };

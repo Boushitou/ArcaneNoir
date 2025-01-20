@@ -79,4 +79,8 @@ void AItemActor::SetItemObject(UItem* NewItemObject)
 	ItemObject = NewItemObject;
 }
 
+void AItemActor::GenerateStats(int32 ActorLevel)
+{
+}
+
 

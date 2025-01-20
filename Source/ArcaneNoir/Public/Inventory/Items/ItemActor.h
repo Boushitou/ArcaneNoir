@@ -48,6 +48,8 @@ public:
 	void SetItemData(FItemData NewItemData);
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	void SetItemObject(UItem* NewItemObject);
+	UFUNCTION()
+	virtual void GenerateStats(int32 ActorLevel);
 
 	FORCEINLINE UItem* GetItemObject() const { return ItemObject; }
 };

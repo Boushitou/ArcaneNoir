@@ -6,6 +6,7 @@
 #include "AIController.h"
 #include "ArcaneNoirEnemyAIController.generated.h"
 
+class UAISense_Prediction;
 /**
  * 
  */
@@ -21,6 +22,9 @@ public:
 
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
+
+	UPROPERTY()
+	UAISense_Prediction* PredictionSense; // will help setup how the ai react
 
 private:
 	

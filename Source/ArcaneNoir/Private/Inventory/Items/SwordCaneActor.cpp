@@ -30,10 +30,10 @@ UItem* ASwordCaneActor::GetDefaultItemObject()
 	
 
 	SwordCane->ItemData = ItemData;
-	UE_LOG(LogTemp, Log, TEXT("ItemData: %s"), *ItemData.Name);
 	SwordCane->WeaponData = WeaponData;
 	SwordCane->ItemData.ItemActorClass = ItemActorClass;
 	SwordCane->EquipementData = EquipementData;
+	SwordCane->RandomInterval = RandomInterval;
 	
 	return SwordCane;
 }

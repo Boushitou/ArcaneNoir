@@ -26,34 +26,6 @@ void ULootTable::BeginPlay()
 	
 }
 
-void ULootTable::GenerateWeaponStats(int32 WeaponLevel, AWeaponActor* WeaponActor)
-{
-	UWeapon* Weapon = Cast<UWeapon>(WeaponActor->GetItemObject());
-
-	if (!IsValid(Weapon))
-		return;
-
-	FWeaponData WeaponStats = Weapon->WeaponData;
-
-	WeaponStats.MinDamage = WeaponStats.BaseMinDamage + (Weapon->ItemData.Factor * WeaponLevel) +
-		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval);
-
-	WeaponStats.MaxDamage = WeaponStats.BaseMaxDamage + (Weapon->ItemData.Factor * WeaponLevel) +
-		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval);
-
-	Weapon->EquipementData.RequiredLevel = WeaponLevel;
-
-	for (auto& Elem : Weapon->EquipementData.AttributeRequired)
-	{
-		Elem.Value = 10 + (0.5 * WeaponLevel);
-	}
-	
-	Weapon->WeaponData = WeaponStats;
-	
-	WeaponActor->SetItemObject(Weapon);
-	
-}
-
 void ULootTable::GetRandomLoot(int32 ActorLevel, FVector SpawnLocation)
 {
 	float TotalProbability = 0.0f;
@@ -73,41 +45,10 @@ void ULootTable::GetRandomLoot(int32 ActorLevel, FVector SpawnLocation)
 		if (RandomValue <= CumulativeProbability)
 		{
 			AItemActor* ItemDrop = GetWorld()->SpawnActor<AItemActor>(LootItem.ItemClass, SpawnLocation, FRotator::ZeroRotator);
-			GenerateItemStats(ActorLevel, ItemDrop);
-		}
-	}
-}
 
-void ULootTable::GenerateItemStats(int32 ActorLevel, AItemActor* ItemActor)
-{
-	if (!IsValid(ItemActor))
-		return;
-
-	int32 ItemLevel = FMath::Clamp(ActorLevel + FMath::RandRange(-2 , 2), 1, 100);
-
-	EItemType ItemType = ItemActor->GetItemObject()->ItemType;
-	switch (ItemType)
-	{
-	case EItemType::Basic:
-		{
-			ItemActor->GetItemObject()->ItemData.Name = "Basic Item";
-			ItemActor->GetItemObject()->ItemData.GridWidth = 1;
-			ItemActor->GetItemObject()->ItemData.GridHeight = 1;
-			break;
-		}
-	case EItemType::Weapon:
-		{
-			AWeaponActor* WeaponActor = Cast<AWeaponActor>(ItemActor);
-			if (!IsValid(WeaponActor))
+			if (!IsValid(ItemDrop))
 				return;
-			
-			GenerateWeaponStats(ItemLevel, WeaponActor);
-			break;
-		}
-	case EItemType::Armor:
-		{
-			ItemActor->GetItemObject()->ItemData.Name = "Armor";
-			break;
+			ItemDrop->GenerateStats(ActorLevel);
 		}
 	}
 }

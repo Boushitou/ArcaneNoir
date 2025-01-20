@@ -34,12 +34,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	void GenerateWeaponStats(int32 WeaponLevel, AWeaponActor* WeaponActor);
 
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Loot")
 	void GetRandomLoot(int32 ActorLevel, FVector SpawnLocation);
-	UFUNCTION(BlueprintCallable, Category = "Loot")
-	void GenerateItemStats(int32 ActorLevel, AItemActor* ItemActor);
 };
