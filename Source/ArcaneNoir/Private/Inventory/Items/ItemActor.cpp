@@ -10,14 +10,20 @@ AItemActor::AItemActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	USceneComponent* SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	SceneComponent->SetMobility(EComponentMobility::Type::Static);
+	SetRootComponent(SceneComponent);
 	
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
-	MeshComponent->SetMobility(EComponentMobility::Type::Stationary);
+	MeshComponent->SetMobility(EComponentMobility::Type::Static);
 	MeshComponent->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	MeshComponent->SetupAttachment(RootComponent);
 	
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
 	CollisionComponent->SetupAttachment(MeshComponent);
-	CollisionComponent->SetMobility(EComponentMobility::Type::Stationary);
+	CollisionComponent->SetMobility(EComponentMobility::Type::Static);
+	CollisionComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

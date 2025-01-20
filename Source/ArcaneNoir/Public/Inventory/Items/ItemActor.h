@@ -31,7 +31,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<AItemActor> ItemActorClass;
-	
+
+	UPROPERTY()
 	UItem* ItemObject;
 
 	virtual UItem* GetDefaultItemObject();
