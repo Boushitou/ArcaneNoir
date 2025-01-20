@@ -39,11 +39,11 @@ void AWeaponActor::GenerateStats(int32 ActorLevel)
 	int32 ItemLevel = FMath::Clamp(ActorLevel + FMath::RandRange(-2 , 2), 1, 100);
 	FWeaponData WeaponStats = Weapon->WeaponData;
 
-	WeaponStats.MinDamage = WeaponStats.BaseMinDamage + (Weapon->ItemData.Factor * ItemLevel) +
-		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval);
+	WeaponStats.MinDamage = FMath::Clamp(WeaponStats.BaseMinDamage + (Weapon->ItemData.Factor * ItemLevel) +
+		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval), 1, 1000);
 
-	WeaponStats.MaxDamage = WeaponStats.BaseMaxDamage + (Weapon->ItemData.Factor * ItemLevel) +
-		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval);
+	WeaponStats.MaxDamage = FMath::Clamp(WeaponStats.BaseMaxDamage + (Weapon->ItemData.Factor * ItemLevel) +
+		FMath::RandRange(-Weapon->RandomInterval, Weapon->RandomInterval), 2, 1000);
 
 	Weapon->EquipementData.RequiredLevel = ItemLevel;
 

@@ -10,6 +10,9 @@ USTRUCT(Blueprintable)
 struct FArmorData
 {
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	int32 BaseArmor;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor, meta = (AllowPrivateAccess = "true"))
 	int32 Armor;
 };
