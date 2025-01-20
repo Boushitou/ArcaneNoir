@@ -68,7 +68,8 @@ private:
 	int32 RowSize;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
 	int32 ColumnSize;
-	
+
+	UPROPERTY()
 	TArray<UItem*> Items;
 
 	void InitializeInventory();

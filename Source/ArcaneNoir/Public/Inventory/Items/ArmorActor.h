@@ -29,7 +29,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void GenerateStats(int32 ActorLevel) override;
-	
+
 protected:
 	void SetArmorData(FArmorData NewArmorData);
+	virtual UItem* GetDefaultItemObject() override;
 };

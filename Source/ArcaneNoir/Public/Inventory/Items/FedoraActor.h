@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "ArmorActor.h"
-#include "Jacket.generated.h"
+#include "FedoraActor.generated.h"
 
 UCLASS()
-class ARCANENOIR_API AJacket : public AArmorActor
+class ARCANENOIR_API AFedoraActor : public AArmorActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AJacket();
+	AFedoraActor();
 
 protected:
 	// Called when the game starts or when spawned

@@ -11,9 +11,9 @@ struct FArmorData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor)
 	int32 BaseArmor;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(BlueprintReadOnly, Category = Armor)
 	int32 Armor;
 };
 
@@ -26,6 +26,6 @@ public:
 
 	UArmor();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	FArmorData ArmorData;
 };

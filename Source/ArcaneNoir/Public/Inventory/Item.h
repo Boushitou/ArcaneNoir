@@ -20,15 +20,15 @@ struct FItemData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	FString Name;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	int32 GridWidth;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	int32 GridHeight;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	UTexture2D* Icon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	float Factor; //to be used for stats calculation and make balancing.
 	TSubclassOf<AItemActor> ItemActorClass;
 };
@@ -41,13 +41,13 @@ class ARCANENOIR_API UItem : public UObject
 public:
 	UItem();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	FItemData ItemData;
 
 	UPROPERTY(BlueprintReadOnly)
 	EItemType ItemType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	int32 RandomInterval; //Is used to generate random stats for the item, can be used for balancing.
 
 	UFUNCTION(BlueprintCallable, Category = "Item")

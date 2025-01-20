@@ -45,6 +45,8 @@ void AArmorActor::GenerateStats(int32 ActorLevel)
 	}
 	
 	Armor->ArmorData = ArmorStats;
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Armor: %d"), Armor->ArmorData.Armor));
 	
 	SetItemObject(Armor);
 }
@@ -54,3 +56,14 @@ void AArmorActor::SetArmorData(FArmorData NewArmorData)
 	ArmorData = NewArmorData;
 }
 
+UItem* AArmorActor::GetDefaultItemObject()
+{
+	UArmor* Armor = NewObject<UArmor>(this);
+
+	Armor->ItemData = ItemData;
+	Armor->ArmorData = ArmorData;
+	Armor->ItemData.ItemActorClass = ItemActorClass;
+	Armor->EquipementData.AttributeRequired = EquipementData.AttributeRequired;
+
+	return Armor;
+}

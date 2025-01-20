@@ -12,9 +12,9 @@ struct FEquipementData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(BlueprintReadWrite, Category = Equipement)
 	int32 RequiredLevel;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement)
 	TMap<EAttributeType, int32> AttributeRequired;
 };
 
@@ -26,6 +26,6 @@ class ARCANENOIR_API UEquipement : public UItem
 public:
 	UEquipement();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Equipement)
 	FEquipementData EquipementData;
 };
