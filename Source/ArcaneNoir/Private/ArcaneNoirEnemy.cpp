@@ -12,7 +12,7 @@
 #include "Enemy/LootTable.h"
 #include "Inventory/Items/ItemActor.h"
 #include "Inventory/Item.h"
-#include "Inventory/Items/Jacket.h"
+#include "Inventory/Items/JacketActor.h"
 
 
 // Sets default values

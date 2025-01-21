@@ -29,6 +29,20 @@ void AWeaponActor::SetWeaponData(FWeaponData NewWeaponData)
 	WeaponData = NewWeaponData;
 }
 
+UItem* AWeaponActor::GetDefaultItemObject()
+{
+	UWeapon* Weapon = NewObject<UWeapon>(this);
+	
+
+	Weapon->ItemData = ItemData;
+	Weapon->WeaponData = WeaponData;
+	Weapon->ItemData.ItemActorClass = ItemActorClass;
+	Weapon->EquipementData = EquipementData;
+	Weapon->RandomInterval = RandomInterval;
+	
+	return Weapon;
+}
+
 void AWeaponActor::GenerateStats(int32 ActorLevel)
 {
 	UWeapon* Weapon = Cast<UWeapon>(GetItemObject());

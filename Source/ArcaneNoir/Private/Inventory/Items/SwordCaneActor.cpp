@@ -23,18 +23,3 @@ void ASwordCaneActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-
-UItem* ASwordCaneActor::GetDefaultItemObject()
-{
-	UWeapon* SwordCane = NewObject<UWeapon>(this);
-	
-
-	SwordCane->ItemData = ItemData;
-	SwordCane->WeaponData = WeaponData;
-	SwordCane->ItemData.ItemActorClass = ItemActorClass;
-	SwordCane->EquipementData = EquipementData;
-	SwordCane->RandomInterval = RandomInterval;
-	
-	return SwordCane;
-}
-

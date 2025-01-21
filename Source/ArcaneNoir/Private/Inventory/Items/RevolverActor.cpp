@@ -24,16 +24,3 @@ void ARevolverActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-UItem* ARevolverActor::GetDefaultItemObject()
-{
-	UWeapon* Revolver = NewObject<UWeapon>(this);
-
-	Revolver->ItemData = ItemData;
-	Revolver->WeaponData = WeaponData;
-	Revolver->ItemData.ItemActorClass = ItemActorClass;
-	Revolver->EquipementData = EquipementData;
-	Revolver->RandomInterval = RandomInterval;
-	
-	return Revolver;
-}
-

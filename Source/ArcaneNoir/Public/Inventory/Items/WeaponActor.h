@@ -35,4 +35,5 @@ public:
 
 protected:
 	void SetWeaponData(FWeaponData NewWeaponData);
+	virtual UItem* GetDefaultItemObject() override;
 };
