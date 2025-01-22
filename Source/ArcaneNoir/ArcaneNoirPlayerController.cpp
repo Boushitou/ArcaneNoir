@@ -147,7 +147,7 @@ void AArcaneNoirPlayerController::OnAttackStarted()
 			return;
 		
 		ArcaneCharacter->GetPlayerStats()->SubscribeToEnemyDeath(HitEnemy);
-		HitActorHealth->TakeDamage(10);
+		ArcaneCharacter->Attack(HitEnemy);
 	}
 }
 

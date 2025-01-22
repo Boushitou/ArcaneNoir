@@ -20,6 +20,7 @@ struct FTile
 };
 
 class UItem;
+class UWeapon;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARCANENOIR_API UInventoryComponent : public UActorComponent
 {
@@ -50,6 +51,8 @@ public:
 	void AddItemAt(UItem* Item, int32 TopLeftIndex);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	UItem* GetItemAtIndex(int32 Index);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	UWeapon* GetHeldWeapon();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	const void GetItemTiles(TMap<UItem*, FTile>& ItemsMap) ;
@@ -71,6 +74,9 @@ private:
 
 	UPROPERTY()
 	TArray<UItem*> Items;
+
+	UPROPERTY()
+	UWeapon* HeldWeapon;
 
 	void InitializeInventory();
 };

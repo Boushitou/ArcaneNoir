@@ -35,7 +35,8 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 void UHealthComponent::TakeDamage(int32 amount)
 {
 	CurrentHealth -= amount;
-
+	OnDamageTaken.Broadcast(amount);
+	
 	if (CurrentHealth <= 0)
 	{
 		CurrentHealth = 0;

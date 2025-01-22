@@ -6,7 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
-DECLARE_MULTICAST_DELEGATE(FOnDeath)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeath);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, int32, Damage);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARCANENOIR_API UHealthComponent : public UActorComponent
@@ -41,7 +42,10 @@ public:
 	FORCEINLINE int32& GetMaxHealth() { return MaxHealth; }
 	FORCEINLINE void SetMaxHealth(int32 newMaxHealth) { MaxHealth = newMaxHealth; }
 
+	UPROPERTY(blueprintAssignable, Category = "Health")
 	FOnDeath OnDeath;
+	UPROPERTY(blueprintAssignable, Category = "Health")
+	FOnDamageTaken OnDamageTaken;
 
 private:
 

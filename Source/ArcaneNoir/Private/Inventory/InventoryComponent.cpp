@@ -3,6 +3,7 @@
 
 #include "Inventory/InventoryComponent.h"
 #include "Inventory/Item.h"
+#include "Inventory/Weapon.h"
 
 UInventoryComponent::UInventoryComponent()
 {
@@ -15,6 +16,17 @@ void UInventoryComponent::BeginPlay()
 	Super::BeginPlay();
 	
 	InitializeInventory();
+
+	UWeapon* StarterWeapon = NewObject<UWeapon>();
+	StarterWeapon->ItemData.Name = "Starter Weapon";
+	StarterWeapon->ItemData.Factor = 1.2;
+	StarterWeapon->ItemData.GridWidth = 1;
+	StarterWeapon->ItemData.GridHeight = 2;
+	StarterWeapon->WeaponData.MinDamage = 5;
+	StarterWeapon->WeaponData.MaxDamage = 10;
+	StarterWeapon->WeaponData.AttackSpeed = 1.5;
+	
+	HeldWeapon = StarterWeapon;
 }
 
 
@@ -188,4 +200,9 @@ const void UInventoryComponent::GetItemTiles(TMap<UItem*, FTile>& ItemsMap)
 			}
 		}
 	}
+}
+
+UWeapon* UInventoryComponent::GetHeldWeapon()
+{
+	return HeldWeapon;
 }

@@ -11,6 +11,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class UPlayerStatsComponent;
 class UHealthComponent;
+class AArcaneNoirEnemy;
 
 UCLASS(Blueprintable)
 class AArcaneNoirCharacter : public ACharacter
@@ -33,7 +34,13 @@ public:
 	FORCEINLINE  UHealthComponent* GetHealthComponent() const { return Health; }
 	FORCEINLINE  UInventoryComponent* GetInventoryComponent() const { return Inventory; }
 
+	UFUNCTION()
 	void HandleDeath();
+
+	UFUNCTION()
+	void Attack(AArcaneNoirEnemy* Enemy);
+	UFUNCTION()
+	int32 CalculateAttackDamage();
 
 private:
 	/** Top down camera */

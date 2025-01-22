@@ -29,9 +29,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
 	void HandleDeath();
+	UFUNCTION()
 	void DisableEnemy();
+	UFUNCTION()
 	void EnableEnemy();
+	UFUNCTION()
 	void SpawnLoot();
 
 	FORCEINLINE UHealthComponent* GetHealthComponent() const { return Health; }

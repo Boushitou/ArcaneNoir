@@ -2,6 +2,7 @@
 
 #include "ArcaneNoirCharacter.h"
 
+#include "ArcaneNoirEnemy.h"
 #include "HealthComponent.h"
 #include "Inventory/InventoryComponent.h"
 #include "PlayerStatsComponent.h"
@@ -14,6 +15,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
+#include "Inventory/Weapon.h"
 
 AArcaneNoirCharacter::AArcaneNoirCharacter()
 {
@@ -57,7 +59,7 @@ AArcaneNoirCharacter::AArcaneNoirCharacter()
 void AArcaneNoirCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Health->OnDeath.AddUObject(this, &AArcaneNoirCharacter::HandleDeath);
+	Health->OnDeath.AddDynamic(this, &AArcaneNoirCharacter::HandleDeath);
 }
 
 void AArcaneNoirCharacter::Tick(float DeltaSeconds)
@@ -71,5 +73,28 @@ void AArcaneNoirCharacter::HandleDeath()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Yellow, TEXT("THE PLAYER IS DEAD"));
 	}
+}
+
+void AArcaneNoirCharacter::Attack(AArcaneNoirEnemy* Enemy)
+{
+	if (Enemy == nullptr)
+		return;
+
+	Enemy->GetHealthComponent()->TakeDamage(CalculateAttackDamage());
+}
+
+int32 AArcaneNoirCharacter::CalculateAttackDamage()
+{
+	UWeapon* Weapon = Inventory->GetHeldWeapon();
+	float StrengthModifier = PlayerStats->GetStrength() / 100.0f;
+	float StrengthFlatBonus = PlayerStats->GetStrength() * 0.5f;
+	
+	if (Weapon == nullptr)
+		return 1 * (1 + StrengthModifier) + StrengthFlatBonus; //hitting with fists
+
+	int32 WeaponDamage = FMath::RandRange(Weapon->WeaponData.MinDamage, Weapon->WeaponData.MaxDamage);
+	int32 FinalDamage = WeaponDamage * (1 + StrengthModifier) + StrengthFlatBonus;
+	
+	return FinalDamage;
 }
 

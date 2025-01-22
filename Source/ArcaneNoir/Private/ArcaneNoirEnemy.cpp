@@ -38,7 +38,7 @@ void AArcaneNoirEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	Origin = GetActorLocation();
-	Health->OnDeath.AddUObject(this, &AArcaneNoirEnemy::HandleDeath);
+	Health->OnDeath.AddDynamic(this, &AArcaneNoirEnemy::HandleDeath);
 }
 
 // Called every frame
