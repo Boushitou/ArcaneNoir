@@ -6,6 +6,8 @@
 #include "GameFramework/GameState.h"
 #include "ArcaneNoirGameState.generated.h"
 
+class AArcaneNoirCharacter;
+class AArcaneNoirEnemy;
 /**
  * 
  */
@@ -19,4 +21,10 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable, Category = "Item")
 	void SpawnItemFromActor(AActor* Actor, UItem* ItemObject);
+
+	UFUNCTION(BlueprintCallable, Category = "Enemy")
+	void OnEnemyDestroyed(AArcaneNoirEnemy* Enemy);
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	AArcaneNoirCharacter* GetPlayerCharacter() const;
 };

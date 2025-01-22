@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "PlayerStatsComponent.generated.h"
 
+class AArcaneNoirEnemy;
+
 UENUM(BlueprintType)
 enum class EAttributeType : uint8
 {
@@ -91,6 +93,10 @@ public:
 	void AddExperience(int32 amount);
 	UFUNCTION(BlueprintCallable)
 	bool HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const;
+	UFUNCTION(BlueprintCallable)
+	void SubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy);
+	UFUNCTION(BlueprintCallable)
+	void UnSubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy);
 
 private:
 

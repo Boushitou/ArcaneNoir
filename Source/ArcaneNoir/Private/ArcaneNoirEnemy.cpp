@@ -59,6 +59,7 @@ void AArcaneNoirEnemy::HandleDeath()
 	}
 	DisableEnemy();
 	SpawnLoot();
+	OnDeath.Broadcast(10); //magic number to test
 }
 
 void AArcaneNoirEnemy::DisableEnemy()

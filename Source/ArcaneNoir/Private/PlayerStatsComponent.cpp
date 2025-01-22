@@ -3,6 +3,8 @@
 
 #include "ArcaneNoir/Public/PlayerStatsComponent.h"
 
+#include "ArcaneNoirEnemy.h"
+
 // Sets default values for this component's properties
 UPlayerStatsComponent::UPlayerStatsComponent()
 {
@@ -63,5 +65,15 @@ bool UPlayerStatsComponent::HasRequiredAttributes(const TMap<EAttributeType, int
 	}
 
 	return true;
+}
+
+void UPlayerStatsComponent::SubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy)
+{
+	Enemy->OnDeath.AddDynamic(this, &UPlayerStatsComponent::AddExperience);
+}
+
+void UPlayerStatsComponent::UnSubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy)
+{
+	Enemy->OnDeath.RemoveDynamic(this, &UPlayerStatsComponent::AddExperience);
 }
 

@@ -5,7 +5,10 @@
 
 #include "Inventory/Item.h"
 #include "Inventory/Items/ItemActor.h"
-#include "Inventory/Items/SwordCaneActor.h"
+#include "ArcaneNoirEnemy.h"
+#include "PlayerStatsComponent.h"
+#include "ArcaneNoir/ArcaneNoirCharacter.h"
+#include "ArcaneNoir/ArcaneNoirPlayerController.h"
 
 void AArcaneNoirGameState::SpawnItemFromActor(AActor* Actor, UItem* ItemObject)
 {
@@ -30,4 +33,29 @@ void AArcaneNoirGameState::SpawnItemFromActor(AActor* Actor, UItem* ItemObject)
 		AItemActor* SpawnedItemActor = GetWorld()->SpawnActor<AItemActor>(ItemObject->GetItemActorClass(), SpawnLocation, FRotator::ZeroRotator);
 		SpawnedItemActor->SetItemObject(ItemObject);
 	}
+}
+
+void AArcaneNoirGameState::OnEnemyDestroyed(AArcaneNoirEnemy* Enemy)
+{
+	AArcaneNoirCharacter* Player = GetPlayerCharacter();
+	
+	if (IsValid(Enemy) && IsValid(Player))
+	{
+		Player->GetPlayerStats()->UnSubscribeToEnemyDeath(Enemy);
+	}
+}
+
+AArcaneNoirCharacter* AArcaneNoirGameState::GetPlayerCharacter() const
+{
+	AArcaneNoirPlayerController* PlayerController = Cast<AArcaneNoirPlayerController>(GetWorld()->GetFirstPlayerController());
+
+	if (!IsValid(PlayerController))
+		return nullptr;
+
+	AArcaneNoirCharacter* Player = Cast<AArcaneNoirCharacter>(PlayerController->GetPawn());
+
+	if (IsValid(Player))
+		return Player;
+
+	return nullptr;
 }

@@ -11,7 +11,7 @@ class USphereComponent;
 class UHealthComponent;
 class UBehaviorTree;
 
-DECLARE_DELEGATE_OneParam()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDeath, int32, XpValue);
 UCLASS()
 class ARCANENOIR_API AArcaneNoirEnemy : public ACharacter
 {
@@ -38,6 +38,8 @@ public:
 	FORCEINLINE UBehaviorTree* GetBehaviorTree() const { return BehaviorTree; }
 
 	FORCEINLINE FVector GetOrigin() const { return Origin; }
+
+	FOnEnemyDeath OnDeath;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))

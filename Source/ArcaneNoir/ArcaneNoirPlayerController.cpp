@@ -13,6 +13,7 @@
 #include "HealthComponent.h"
 #include "PlayerStatsComponent.h"
 #include "Engine/LocalPlayer.h"
+#include "ArcaneNoirEnemy.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -28,6 +29,11 @@ void AArcaneNoirPlayerController::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	AArcaneNoirCharacter* ArcanePlayer = Cast<AArcaneNoirCharacter>(GetPawn());
+
+	if (IsValid(ArcanePlayer))
+		ArcaneCharacter = ArcanePlayer;
 }
 
 void AArcaneNoirPlayerController::SetupInputComponent()
@@ -127,6 +133,11 @@ void AArcaneNoirPlayerController::OnAttackStarted()
 	}
 
 	AActor* HitActor = Hit.GetActor();
+	AArcaneNoirEnemy* HitEnemy = Cast<AArcaneNoirEnemy>(HitActor);
+
+	if (!IsValid(HitEnemy))
+		return;
+	
 	UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, CachedDestination);
 
 	if (HitActor != nullptr)
@@ -134,7 +145,8 @@ void AArcaneNoirPlayerController::OnAttackStarted()
 		UHealthComponent* HitActorHealth = HitActor->FindComponentByClass<UHealthComponent>();
 		if (HitActorHealth == nullptr)
 			return;
-
+		
+		ArcaneCharacter->GetPlayerStats()->SubscribeToEnemyDeath(HitEnemy);
 		HitActorHealth->TakeDamage(10);
 	}
 }
@@ -144,7 +156,6 @@ void AArcaneNoirPlayerController::OnDrinkHealthPotionStarted()
 	APawn* ControlledPawn = GetPawn();
 	if (ControlledPawn != nullptr)
 	{
-		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
 		if (ArcaneCharacter == nullptr)
 			return;
 
@@ -161,7 +172,6 @@ void AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted()
 	APawn* ControlledPawn = GetPawn();
 	if (ControlledPawn != nullptr)
 	{
-		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
 		if (ArcaneCharacter == nullptr)
 			return;
 
@@ -213,7 +223,6 @@ void AArcaneNoirPlayerController::OnTestInputStarted()
 	APawn* ControlledPawn = GetPawn();
 	if (ControlledPawn != nullptr)
 	{
-		AArcaneNoirCharacter* ArcaneCharacter = Cast<AArcaneNoirCharacter>(ControlledPawn);
 		if (ArcaneCharacter == nullptr)
 			return;
 		//

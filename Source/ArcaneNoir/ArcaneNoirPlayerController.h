@@ -7,6 +7,7 @@
 #include "GameFramework/PlayerController.h"
 #include "ArcaneNoirPlayerController.generated.h"
 
+class AArcaneNoirCharacter;
 /** Forward declaration to improve compiling times */
 class UNiagaraSystem;
 class UInputMappingContext;
@@ -94,6 +95,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AHUD* ArcaneNoirHUD;
+
+	UPROPERTY(BlueprintReadOnly)
+	AArcaneNoirCharacter* ArcaneCharacter;
 private:
 	FVector CachedDestination;
 	
