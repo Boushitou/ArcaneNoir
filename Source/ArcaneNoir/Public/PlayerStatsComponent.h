@@ -102,4 +102,5 @@ private:
 
 	int32 CurrentXp;
 	int32 XpNeeded;
+	int32 LevelUpQueue;
 };

@@ -39,6 +39,8 @@ public:
 
 	FORCEINLINE FVector GetOrigin() const { return Origin; }
 
+	const int32 CalculateXpValue();
+
 	FOnEnemyDeath OnDeath;
 
 private:
@@ -57,4 +59,6 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
 	float Radius;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
+	int32 BaseXpValue;
 };

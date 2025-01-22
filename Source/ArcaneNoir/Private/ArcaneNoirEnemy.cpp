@@ -59,7 +59,8 @@ void AArcaneNoirEnemy::HandleDeath()
 	}
 	DisableEnemy();
 	SpawnLoot();
-	OnDeath.Broadcast(10); //magic number to test
+	OnDeath.Broadcast(CalculateXpValue());
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Purple, FString::Printf(TEXT("Xp given: %d"), CalculateXpValue()));
 }
 
 void AArcaneNoirEnemy::DisableEnemy()
@@ -93,6 +94,11 @@ void AArcaneNoirEnemy::SpawnLoot()
 	
 	FVector SpawnLocation = GetActorLocation();
 	LootTable->GetRandomLoot(Level, SpawnLocation);
+}
+
+const int32 AArcaneNoirEnemy::CalculateXpValue()
+{
+	return BaseXpValue * Level + 1;
 }
 
 

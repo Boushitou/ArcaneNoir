@@ -30,9 +30,6 @@ void UPlayerStatsComponent::LevelUp()
 {
 	Level++;
 
-	CurrentXp -= XpNeeded;
-	XpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
-
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Level: %d"), Level));
@@ -42,15 +39,13 @@ void UPlayerStatsComponent::LevelUp()
 void UPlayerStatsComponent::AddExperience(int32 amount)
 {
 	CurrentXp += amount;
-
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("Current XP: %d"), CurrentXp));
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("XP needed: %d"), XpNeeded));
-	}
 	
-	if (CurrentXp >= XpNeeded)
+	while (CurrentXp >= XpNeeded)
+	{
+		CurrentXp -= XpNeeded;
+		XpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
 		LevelUp();
+	}
 }
 
 bool UPlayerStatsComponent::HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const
@@ -69,6 +64,8 @@ bool UPlayerStatsComponent::HasRequiredAttributes(const TMap<EAttributeType, int
 
 void UPlayerStatsComponent::SubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy)
 {
+	if (Enemy->OnDeath.IsAlreadyBound(this, &UPlayerStatsComponent::AddExperience))
+		return;
 	Enemy->OnDeath.AddDynamic(this, &UPlayerStatsComponent::AddExperience);
 }
 
