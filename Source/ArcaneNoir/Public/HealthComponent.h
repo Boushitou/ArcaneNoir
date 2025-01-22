@@ -34,7 +34,11 @@ public:
 	void Death();
 
 	FORCEINLINE const bool& GetIsDead() { return bIsDead; }
-	
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetCurrentHealth() { return CurrentHealth; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetMaxHealth() { return MaxHealth; }
 	FORCEINLINE void SetMaxHealth(int32 newMaxHealth) { MaxHealth = newMaxHealth; }
 
 	FOnDeath OnDeath;

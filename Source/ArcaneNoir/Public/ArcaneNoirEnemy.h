@@ -10,6 +10,8 @@ class ULootTable;
 class USphereComponent;
 class UHealthComponent;
 class UBehaviorTree;
+
+DECLARE_DELEGATE_OneParam()
 UCLASS()
 class ARCANENOIR_API AArcaneNoirEnemy : public ACharacter
 {

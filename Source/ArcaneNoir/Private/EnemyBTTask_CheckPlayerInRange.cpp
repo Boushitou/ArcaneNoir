@@ -35,15 +35,11 @@ EBTNodeResult::Type UEnemyBTTask_CheckPlayerInRange::ExecuteTask(UBehaviorTreeCo
 			if (Distance <= CheckRadius)
 			{
 				OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerPosition);
-
-				if (GEngine)
-					GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Player is in range !"));
+				
 				return EBTNodeResult::Succeeded;
 			}
 		}
 	}
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Failed task"));
 	
 	return EBTNodeResult::Failed;
 }

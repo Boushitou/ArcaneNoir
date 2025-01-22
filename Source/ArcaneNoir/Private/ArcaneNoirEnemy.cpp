@@ -55,7 +55,7 @@ void AArcaneNoirEnemy::HandleDeath()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("AAAAAH HE S DEAD!!"));
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Enemy died !"));
 	}
 	DisableEnemy();
 	SpawnLoot();

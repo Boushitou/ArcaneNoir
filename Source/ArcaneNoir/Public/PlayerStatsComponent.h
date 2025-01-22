@@ -51,25 +51,45 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Balancing")
 	float XpFactor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	UPROPERTY(BlueprintReadWrite, Category = "Stats")
 	TMap<EAttributeType, int32> AttributesRequirement;
-	
-	FORCEINLINE const int32& GetLevel() { return Level; }
-	FORCEINLINE const int32& GetStrength() { return Strength; }
-	FORCEINLINE const int32& GetBlackInk() { return BlackInk; }
-	FORCEINLINE const int32& GetDexterity() { return Dexterity; }
-	FORCEINLINE const int32& GetVitality() { return Vitality; }
-	FORCEINLINE const int32& GetIntelligence() { return Intelligence; }
 
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetLevel() { return Level; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetStrength() { return Strength; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetBlackInk() { return BlackInk; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetDexterity() { return Dexterity; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetVitality() { return Vitality; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetIntelligence() { return Intelligence; }
+	
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetCurrentXp() { return CurrentXp; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32& GetXpNeeded() { return XpNeeded; }
+
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetLevel(int32 newLevel) { Level = newLevel; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetBlackInk(int32 newBlackInk) { BlackInk = newBlackInk; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetStrength(int32 newStrength) { Strength = newStrength; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetDexterity(int32 newDexterity) { Dexterity = newDexterity; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetVitality(int32 newVitality) { Vitality = newVitality; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetIntelligence(int32 newIntelligence) { Intelligence = newIntelligence; }
 
+	UFUNCTION(BlueprintCallable)
 	void LevelUp();
+	UFUNCTION(BlueprintCallable)
 	void AddExperience(int32 amount);
+	UFUNCTION(BlueprintCallable)
 	bool HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const;
 
 private:
