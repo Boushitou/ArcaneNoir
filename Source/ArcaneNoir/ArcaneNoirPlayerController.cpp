@@ -45,7 +45,7 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 	// Add Input Mapping Context
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
-		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		Subsystem->AddMappingContext(DefaultMappingContext, 1);
 	}
 
 	// Set up action bindings
@@ -63,9 +63,9 @@ void AArcaneNoirPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(UseSkillThreeAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnUseSkillThreeStarted);
 		EnhancedInputComponent->BindAction(DrinkHealthPotionAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnDrinkHealthPotionStarted);
 		EnhancedInputComponent->BindAction(DrinkBlackInkPotionAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnDrinkBlackInkPotionStarted);
-		EnhancedInputComponent->BindAction(OpenInventoryMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenInventoryMenuStarted);
+		// EnhancedInputComponent->BindAction(OpenInventoryMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenInventoryMenuStarted);
 		EnhancedInputComponent->BindAction(OpenPauseMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenPauseMenuStarted);
-		EnhancedInputComponent->BindAction(OpenStatsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenStatsMenuStarted);
+		// EnhancedInputComponent->BindAction(OpenStatsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenStatsMenuStarted);
 		EnhancedInputComponent->BindAction(OpenSkillsMenuAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnOpenSkillsMenuStarted);
 		EnhancedInputComponent->BindAction(GiveXpAction, ETriggerEvent::Started, this, &AArcaneNoirPlayerController::OnTestInputStarted);
 	}
