@@ -2,6 +2,8 @@
 
 
 #include "Inventory/InventoryComponent.h"
+
+#include "Inventory/Armor.h"
 #include "Inventory/Item.h"
 #include "Inventory/Weapon.h"
 
@@ -26,7 +28,7 @@ void UInventoryComponent::BeginPlay()
 	StarterWeapon->WeaponData.MaxDamage = 10;
 	StarterWeapon->WeaponData.AttackSpeed = 1.5;
 	
-	HeldWeapon = StarterWeapon;
+	HeldWeapon = nullptr;
 }
 
 
@@ -181,6 +183,62 @@ int32 UInventoryComponent::GetFirstItemIndex(UItem* Item)
 	}
 
 	return INDEX_NONE;
+}
+
+void UInventoryComponent::SetHeldWeapon(UWeapon* Weapon)
+{
+	HeldWeapon = Weapon;
+}
+
+UArmor* UInventoryComponent::GetHeldHead()
+{
+	return HeldHead;
+}
+
+void UInventoryComponent::SetHeldHead(UArmor* Armor)
+{
+	HeldHead = Armor;
+}
+
+UArmor* UInventoryComponent::GetHeldArmor()
+{
+	return HeldArmor;
+}
+
+void UInventoryComponent::SetHeldArmor(UArmor* Armor)
+{
+	HeldArmor = Armor;
+}
+
+void UInventoryComponent::EquipSelectedItem(UItem* Item)
+{
+	if (Item == nullptr)
+		return;
+	
+	switch (Item->ItemType)
+	{
+	case EItemType::Weapon:
+		SetHeldWeapon(Cast<UWeapon>(Item));
+		break;
+	case EItemType::Armor:
+		switch (Cast<UArmor>(Item)->ArmorData.ArmorType)
+		{
+	case EArmorType::Head:
+		SetHeldHead(Cast<UArmor>(Item));
+			break;
+	case EArmorType::Chest:
+		SetHeldArmor(Cast<UArmor>(Item));
+			break;
+	default:
+		break;
+		}
+		break;
+	default:
+		break;
+	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Item equipped: %s"), *Item->ItemData.Name));
+	OnInventoryChanged.Broadcast();
 }
 
 void UInventoryComponent::InitializeInventory()

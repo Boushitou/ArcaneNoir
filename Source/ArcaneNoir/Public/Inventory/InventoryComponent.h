@@ -53,7 +53,20 @@ public:
 	UItem* GetItemAtIndex(int32 Index);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	UWeapon* GetHeldWeapon();
+	void SetHeldWeapon(UWeapon* Weapon);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	UArmor* GetHeldHead();
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetHeldHead(UArmor* Armor);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	UArmor* GetHeldArmor();
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetHeldArmor(UArmor* Armor);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void EquipSelectedItem(UItem* Item);
+
+	
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	const void GetItemTiles(TMap<UItem*, FTile>& ItemsMap) ;
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -77,6 +90,10 @@ private:
 
 	UPROPERTY()
 	UWeapon* HeldWeapon;
+	UPROPERTY()
+	UArmor* HeldHead;
+	UPROPERTY()
+	UArmor* HeldArmor;
 
 	void InitializeInventory();
 };
