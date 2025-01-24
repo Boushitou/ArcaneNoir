@@ -23,6 +23,8 @@ void AArcaneNoirEnemyAIController::OnPossess(APawn* InPawn)
 
 	if (const AArcaneNoirEnemy* enemy = Cast<AArcaneNoirEnemy>(InPawn))
 	{
+		if (!enemy->isPossesed)
+			return;
 		if (UBehaviorTree* behaviorTree = enemy->GetBehaviorTree())
 		{
 			UBlackboardComponent* blackBoard;

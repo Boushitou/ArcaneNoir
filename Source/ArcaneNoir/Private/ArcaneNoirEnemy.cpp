@@ -69,6 +69,8 @@ void AArcaneNoirEnemy::DisableEnemy()
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
 
+	if (!isPossesed)
+		return;
 	if (AArcaneNoirEnemyAIController* AIController = Cast<AArcaneNoirEnemyAIController>(GetController()))
 	{
 		AIController->BrainComponent->StopLogic(TEXT("Enemy died"));

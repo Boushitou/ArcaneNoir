@@ -46,6 +46,8 @@ public:
 	const int32 CalculateXpValue();
 
 	FOnEnemyDeath OnDeath;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
+	bool isPossesed;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health, meta = (AllowPrivateAccess = "true"))
@@ -57,12 +59,13 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Loot, meta = (AllowPrivateAccess = "true"))
 	ULootTable* LootTable;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Loot, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = XP, meta = (AllowPrivateAccess = "true"))
 	int32 Level;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = XP, meta = (AllowPrivateAccess = "true"))
+	int32 BaseXpValue;
+
 	FVector Origin;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
 	float Radius;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = debug, meta = (AllowPrivateAccess = "true"))
-	int32 BaseXpValue;
 };
