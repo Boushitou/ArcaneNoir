@@ -92,6 +92,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddExperience(int32 amount);
 	UFUNCTION(BlueprintCallable)
+	FIntPoint GetMinMaxDamage();
+	UFUNCTION(BlueprintCallable)
 	bool HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const;
 	UFUNCTION(BlueprintCallable)
 	void SubscribeToEnemyDeath(AArcaneNoirEnemy* Enemy);

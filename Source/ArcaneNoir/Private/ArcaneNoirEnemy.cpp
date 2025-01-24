@@ -38,6 +38,8 @@ void AArcaneNoirEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	Origin = GetActorLocation();
+	Health->SetMaxHealth(20 * Level);
+	Health->HealHealth(20 * Level);
 	Health->OnDeath.AddDynamic(this, &AArcaneNoirEnemy::HandleDeath);
 }
 

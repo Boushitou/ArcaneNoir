@@ -4,6 +4,9 @@
 #include "ArcaneNoir/Public/PlayerStatsComponent.h"
 
 #include "ArcaneNoirEnemy.h"
+#include "ArcaneNoir/ArcaneNoirCharacter.h"
+#include "Inventory/InventoryComponent.h"
+#include "Inventory/Weapon.h"
 
 // Sets default values for this component's properties
 UPlayerStatsComponent::UPlayerStatsComponent()
@@ -46,6 +49,30 @@ void UPlayerStatsComponent::AddExperience(int32 amount)
 		XpNeeded = BaseXpNeeded * FMath::Pow(XpFactor , Level - 1);
 		LevelUp();
 	}
+}
+
+FIntPoint UPlayerStatsComponent::GetMinMaxDamage()
+{
+	float StrengthModifier = GetStrength() / 100.0f;
+	float StrengthFlatBonus = GetStrength() * 0.5f;
+	
+	AArcaneNoirCharacter* ArcanePlayer = Cast<AArcaneNoirCharacter>(GetOwner());
+	if (ArcanePlayer)
+	{
+		UInventoryComponent* Inventory = ArcanePlayer->GetInventoryComponent();
+		if (Inventory)
+		{
+			UWeapon* Weapon = Inventory->GetHeldWeapon();
+			if (Weapon)
+			{
+				int32 MinDamage = Weapon->WeaponData.MinDamage * (1 + StrengthModifier) + StrengthFlatBonus;;
+				int32 MaxDamage = Weapon->WeaponData.MaxDamage * (1 + StrengthModifier) + StrengthFlatBonus;;
+				return FIntPoint(MinDamage, MaxDamage);
+			}
+		}
+	}
+	//fist damage based on strength.
+	return FIntPoint((1 + StrengthModifier) + StrengthFlatBonus,(1 + StrengthModifier) + StrengthFlatBonus);
 }
 
 bool UPlayerStatsComponent::HasRequiredAttributes(const TMap<EAttributeType, int32>& RequiredAttributes) const

@@ -94,7 +94,7 @@ int32 AArcaneNoirCharacter::CalculateAttackDamage()
 
 	int32 WeaponDamage = FMath::RandRange(Weapon->WeaponData.MinDamage, Weapon->WeaponData.MaxDamage);
 	int32 FinalDamage = WeaponDamage * (1 + StrengthModifier) + StrengthFlatBonus;
-	
+
 	return FinalDamage;
 }
 
