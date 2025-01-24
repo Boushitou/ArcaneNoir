@@ -239,6 +239,37 @@ void UInventoryComponent::EquipSelectedItem(UItem* Item)
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Item equipped: %s"), *Item->ItemData.Name));
 	OnInventoryChanged.Broadcast();
+	OnItemEquiped.Broadcast(Item);
+}
+
+void UInventoryComponent::UnEquipSelectedItem(UItem* Item)
+{
+	if (Item == nullptr)
+		return;
+	
+	switch (Item->ItemType)
+	{
+	case EItemType::Weapon:
+		SetHeldWeapon(nullptr);
+		break;
+	case EItemType::Armor:
+		switch (Cast<UArmor>(Item)->ArmorData.ArmorType)
+		{
+	case EArmorType::Head:
+		SetHeldHead(nullptr);
+			break;
+	case EArmorType::Chest:
+		SetHeldArmor(nullptr);
+			break;
+	default:
+		break;
+		}
+		break;
+	default:
+		break;
+	}
+
+	OnItemEquiped.Broadcast(nullptr);
 }
 
 void UInventoryComponent::InitializeInventory()

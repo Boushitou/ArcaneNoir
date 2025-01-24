@@ -6,7 +6,7 @@
 #include "Equipement.h"
 #include "Armor.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class EArmorType: uint8
 {
 	Head = 0 UMETA(DisplayName = "Head"),
@@ -22,7 +22,7 @@ struct FArmorData
 	int32 BaseArmor;
 	UPROPERTY(BlueprintReadOnly, Category = Armor)
 	int32 Armor;
-	UPROPERTY(BlueprintReadOnly, Category = Armor)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Armor)
 	EArmorType ArmorType;
 };
 

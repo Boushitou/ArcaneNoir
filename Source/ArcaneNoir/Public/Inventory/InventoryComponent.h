@@ -7,6 +7,7 @@
 #include "InventoryComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemEquiped, UItem*, Item);
 
 USTRUCT(Blueprintable)
 struct FTile
@@ -65,6 +66,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void EquipSelectedItem(UItem* Item);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UnEquipSelectedItem(UItem* Item);
 
 	
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -78,6 +81,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryChanged OnInventoryChanged;
+
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FOnItemEquiped OnItemEquiped;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = true))
